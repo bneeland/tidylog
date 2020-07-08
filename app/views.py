@@ -20,8 +20,8 @@ class AreasMixin(ContextMixin):
 class LogsMixin(ContextMixin):
     def get_context_data(self, **kwargs):
         context = super(LogsMixin, self).get_context_data(**kwargs)
-        area = self.kwargs['area']
-        logs = models.Log.objects.filter(area=area)
+        area_pk = self.kwargs['area_pk']
+        logs = models.Log.objects.filter(area=area_pk)
         context['logs'] = logs
         return context
 
@@ -44,7 +44,14 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        log = self.kwargs['log']
+        # Get area from URL
+        area_pk = self.kwargs['area_pk']
+        area = models.Area.objects.get(pk=area_pk)
+        context['area'] = area
+        # Get log from URL
+        log_pk = self.kwargs['log_pk']
+        log = models.Log.objects.get(pk=log_pk)
+        context['log'] = log
         context['entries'] = models.Entry.objects.filter(log=log)
         return context
 

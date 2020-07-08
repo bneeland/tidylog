@@ -6,5 +6,5 @@ app_name = 'app'
 
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
-    path('log/<int:area>/<int:log>', views.Log.as_view(), name='log'),
+    path('log/<int:area_pk>/<int:log_pk>', views.Log.as_view(), name='log'),
 ]

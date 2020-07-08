@@ -15,6 +15,13 @@
     {% for log in logs %}
       <p>{{ log }}</p>
     {% endfor %}
+    <h1>New entry form</h1>
+    <h2>Current area: {{ area.name }}</h2>
+    <h2>Current log: {{ log.name }}</h2>
+    <h1>Entries</h1>
+    {% for entry in entries %}
+      <p>{{ entry }}</p>
+    {% endfor %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
