@@ -7,16 +7,29 @@ class Area(models.Model):
     def __str__(self):
         return self.name
 
+# class FieldBank(models.Model):
+#     name = models.CharField(max_length=50)
+#     FIELD_BANK = (
+#         ('CF1', 'Short text field 1'),
+#         ('CF2', 'Short text field 2'),
+#         ('INT', 'Integer'),
+#         ('FLOAT', 'Floating point number'),
+#     )
+#     type = models.CharField(max_length=3, choices=FIELD_BANK, default=None, blank=True, null=True)
+
 class Field(models.Model):
     name = models.CharField(max_length=50)
-
-    FIELD_TYPE_CHOICES = (
-        ('CHAR', 'Short text'),
-        ('TEXT', 'Long text'),
-        ('INT', 'Integer'),
-        ('FLOAT', 'Floating point number'),
+    FIELD_BANK = (
+        ('CF1', 'Short text field 1'),
+        ('CF2', 'Short text field 2'),
+        ('TF1', 'Long text field 1'),
+        ('TF2', 'Long text field 2'),
+        ('IF1', 'Integer field 1'),
+        ('IF2', 'Integer field 2'),
+        ('FF1', 'Floating point number field 1'),
+        ('FF2', 'Floating point number field 2'),
     )
-    type = models.CharField(max_length=5, choices=FIELD_TYPE_CHOICES, default=None, blank=True, null=True)
+    type = models.CharField(max_length=3, choices=FIELD_BANK, default=None, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -58,21 +71,17 @@ class Entry(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    char_field_one = models.CharField(max_length=50, blank=True, null=True)
-    char_field_two = models.CharField(max_length=50, blank=True, null=True)
-    char_field_three = models.CharField(max_length=50, blank=True, null=True)
+    CF1 = models.CharField(max_length=50, blank=True, null=True)
+    CF2 = models.CharField(max_length=50, blank=True, null=True)
 
-    text_field_one = models.TextField(blank=True, null=True)
-    text_field_two = models.TextField(blank=True, null=True)
-    text_field_three = models.TextField(blank=True, null=True)
+    TF1 = models.TextField(blank=True, null=True)
+    TF2 = models.TextField(blank=True, null=True)
 
-    int_field_one = models.IntegerField(blank=True, null=True)
-    int_field_two = models.IntegerField(blank=True, null=True)
-    int_field_three = models.IntegerField(blank=True, null=True)
+    IF1 = models.IntegerField(blank=True, null=True)
+    IF2 = models.IntegerField(blank=True, null=True)
 
-    float_field_one = models.FloatField(blank=True, null=True)
-    float_field_two = models.FloatField(blank=True, null=True)
-    float_field_three = models.FloatField(blank=True, null=True)
+    FF1 = models.FloatField(blank=True, null=True)
+    FF2 = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return self.created_at
