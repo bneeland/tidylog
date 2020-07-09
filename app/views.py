@@ -38,9 +38,9 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
     login_url = "login"
     model = models.Entry
     template_name = "app/log.html"
-    # form_class = forms.CreateEntryForm
+    form_class = forms.CreateEntryForm
     success_url = reverse_lazy('app:log')
-    fields = ['category']
+    # fields = ['category']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -54,6 +54,24 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         context['log'] = log
         context['entries'] = models.Entry.objects.filter(log=log)
         return context
+
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs.update({'user': self.request.user})
+    #     return kwargs
+
+
+
+
+        #     field_codes.append(field_code)
+        # # Assign the fields to the form 'fields' variable
+        # self.fields = field_codes
+        # self.fields += ['CF1']
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(MyCreateView, self).get_form_kwargs()
+    #     kwargs['user'] = self.request.user
+    #     return kwargs
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
