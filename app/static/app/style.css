@@ -9,6 +9,10 @@
   --grey1: #F2F3F5;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--black);
