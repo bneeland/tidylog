@@ -7,16 +7,6 @@ class Area(models.Model):
     def __str__(self):
         return self.name
 
-# class FieldBank(models.Model):
-#     name = models.CharField(max_length=50)
-#     FIELD_BANK = (
-#         ('CF1', 'Short text field 1'),
-#         ('CF2', 'Short text field 2'),
-#         ('INT', 'Integer'),
-#         ('FLOAT', 'Floating point number'),
-#     )
-#     type = models.CharField(max_length=3, choices=FIELD_BANK, default=None, blank=True, null=True)
-
 class Field(models.Model):
     name = models.CharField(max_length=50)
     FIELD_BANK = (
@@ -38,23 +28,6 @@ class Log(models.Model):
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     fields = models.ManyToManyField(Field)
-
-    # FIELD_TYPE_CHOICES = (
-    #     ('CHAR', 'Short text'),
-    #     ('TEXT', 'Long text'),
-    #     ('INT', 'Integer'),
-    #     ('FLOAT', 'Floating point number'),
-    # )
-    #
-    # field_one_type = models.CharField(max_length=5, choices=FIELD_TYPE_CHOICES, default=None, blank=True, null=True)
-    # field_one_name = models.CharField(max_length=50, blank=True, null=True)
-    # field_two_type = models.CharField(max_length=5, choices=FIELD_TYPE_CHOICES, default=None, blank=True, null=True)
-    # field_two_name = models.CharField(max_length=50, blank=True, null=True)
-    # field_three_type = models.CharField(max_length=5, choices=FIELD_TYPE_CHOICES, default=None, blank=True, null=True)
-    # field_three_name = models.CharField(max_length=50, blank=True, null=True)
-    # field_four_type = models.CharField(max_length=5, choices=FIELD_TYPE_CHOICES, default=None, blank=True, null=True)
-    # field_four_name = models.CharField(max_length=50, blank=True, null=True)
-
 
     def __str__(self):
         return self.name

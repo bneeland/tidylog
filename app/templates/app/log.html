@@ -33,29 +33,32 @@
     </div>
 
     <div class="col-6 col-entry">
-      <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
-      <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
-      Search
-      Filter by date
-      <table class="table">
+      <div class="tools mt-1 mb-3">
+        <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
+        <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
+        <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search">
+        Filter by date
+      </div>
+      <table class="table" id="myTable">
         <thead>
           <tr>
+            <th scope="col"><b>Date/time</b></th>
             {% for heading in headings %}
-              <th scope="col">{{ heading.name }}</th>
+              <th scope="col"><b>{{ heading.name }}</b></th>
             {% endfor %}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {% for entry in entries %}
-              <td>{{ entry.created_at }}</td>
-            {% endfor %}
-          </tr>
+          {% for entry in entries %}
+            <tr id="table_rows">
+                <td>{{ entry.created_at }}</td>
+                <td>{{ entry.CF1 }}</td>
+                <td>{{ entry.TF1 }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
-
-
 
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -83,9 +86,48 @@
         </div>
       </div>
 
-      </div>
-
     </div>
+
+    <div class="col-2 col-acknowledge p-1">
+      <div class="btn-group dropdown btn-block">
+        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Unit lead
+        </button>
+        <div class="dropdown-menu">
+          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
+          <a class="dropdown-item" href="#">Acknowledge</a>
+        </div>
+      </div>
+      <div class="btn-group dropdown btn-block">
+        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Superintendent
+        </button>
+        <div class="dropdown-menu">
+          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
+          <a class="dropdown-item" href="#">Acknowledge</a>
+        </div>
+      </div>
+      <div class="btn-group dropdown btn-block">
+        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Engineering
+        </button>
+        <div class="dropdown-menu">
+          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
+          <a class="dropdown-item" href="#">Acknowledge</a>
+        </div>
+      </div>
+      <div class="btn-group dropdown btn-block">
+        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          New shift
+        </button>
+        <div class="dropdown-menu">
+          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
+          <a class="dropdown-item" href="#">Acknowledge</a>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 </div>
 {% endblock %}
