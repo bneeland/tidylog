@@ -5,8 +5,8 @@
 {% block title %}Logs{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid h-100">
+  <div class="row h-100">
 
     <div class="col-2 col-area p-1">
       {% for area in areas %}
@@ -31,7 +31,7 @@
         <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
       {% endfor %}
     </div>
-    
+
   </div>
 </div>
 {% endblock %}
