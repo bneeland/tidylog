@@ -7,6 +7,7 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
+
     <div class="col-2 col-area p-1">
       {% for area in areas %}
         <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
@@ -24,11 +25,13 @@
       </div>
       <a href="{% url 'admin:index' %}" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
     </div>
+
     <div class="col-2 col-log p-1">
       {% for log in logs %}
         <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
       {% endfor %}
     </div>
+    
   </div>
 </div>
 {% endblock %}
