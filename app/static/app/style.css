@@ -3,15 +3,39 @@
   --blue-light: #6190F8;
   --green: #43B581;
   --black: #33363A;
-  --grey1: #4F5660;
-  --grey2: #747F8D;
-  --grey3: #E3E5E8;
-  --grey4: #F2F3F5;
+  --grey4: #4F5660;
+  --grey3: #747F8D;
+  --grey2: #E3E5E8;
+  --grey1: #F2F3F5;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--black);
+}
+
+.col-area {
+  background: var(--grey2);
+  color: var(--grey3);
+}
+
+.col-area a, .col-area button {
+  color: var(--grey3);
+  text-align: left;
+}
+
+.col-log {
+  background: var(--grey1);
+  color: var(--grey3);
+}
+
+.col-log a, .col-area button {
+  color: var(--grey3);
+  text-align: left;
+}
+
+.col-entry {
+  background: white;
 }
 
 a, .btn-link {
@@ -33,4 +57,9 @@ a:hover, .btn-link:hover {
 
 .btn-primary:hover {
   background: var(--blue-light);
+}
+
+.sidebarnav:hover {
+  background: var(--blue-light);
+  color: white;
 }
