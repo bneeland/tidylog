@@ -40,7 +40,6 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
     model = models.Entry
     template_name = "app/log.html"
     form_class = forms.CreateEntryForm
-    success_url = reverse_lazy('app:log')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,6 +62,8 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         })
         return kwargs
 
+    def get_success_url(self):
+        return reverse_lazy('app:log', kwargs={'area_pk': self.kwargs['area_pk'], 'log_pk': self.kwargs['log_pk'],})
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user

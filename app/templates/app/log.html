@@ -5,29 +5,67 @@
 {% block title %}Logs{% endblock %}
 
 {% block content %}
-    <p>[Logged in as {{ user.email }}.]</p>
-    <p>This is in the log view.</p>
-    <h1>Areas</h1>
-    {% for area in areas %}
-      <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
-    {% endfor %}
-    <h1>Logs</h1>
-    {% for log in logs %}
-      <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
-    {% endfor %}
-    <h1>New entry form</h1>
-    <h2>Current area: {{ area.name }}</h2>
-    <h2>Current log: {{ log.name }}</h2>
-    <h1>Entries</h1>
-    {% for entry in entries %}
-      <p>{{ entry }}</p>
-    {% endfor %}
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Submit" class="btn btn-primary btn-block">
-    </form>
-    <hr>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-    <p><a href="{% url 'password_change' %}">Change password</a></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <h1>Areas</h1>
+      {% for area in areas %}
+        <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
+      {% endfor %}
+      <p>[Logged in as {{ user.email }}.]</p>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+      <p><a href="{% url 'password_change' %}">Change password</a></p>
+    </div>
+    <div class="col-2"
+      <h1>Logs</h1>
+      {% for log in logs %}
+        <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
+      {% endfor %}
+      <hr>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+      <p><a href="{% url 'password_change' %}">Change password</a></p>
+    </div>
+    <div class="col-6">
+      <h1>Entries</h1>
+      <h2>Current area: {{ area.name }}</h2>
+      <h2>Current log: {{ log.name }}</h2>
+      <h1>Entries</h1>
+      {% for entry in entries %}
+        <p>{{ entry }}</p>
+      {% endfor %}
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add entry
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-primary btn-block">
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

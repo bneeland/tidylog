@@ -5,17 +5,26 @@
 {% block title %}Logs{% endblock %}
 
 {% block content %}
-    <p>[Logged in as {{ user.email }}.]</p>
-    <p>This is in the log view.</p>
-    <h1>Areas</h1>
-    {% for area in areas %}
-      <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
-    {% endfor %}
-    <h1>Logs</h1>
-    {% for log in logs %}
-      <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
-    {% endfor %}
-    <hr>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-    <p><a href="{% url 'password_change' %}">Change password</a></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <h1>Areas</h1>
+      {% for area in areas %}
+        <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
+      {% endfor %}
+      <p>[Logged in as {{ user.email }}.]</p>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+      <p><a href="{% url 'password_change' %}">Change password</a></p>
+    </div>
+    <div class="col-2"
+      <h1>Logs</h1>
+      {% for log in logs %}
+        <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
+      {% endfor %}
+      <hr>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+      <p><a href="{% url 'password_change' %}">Change password</a></p>
+    </div>
+  </div>
+</div>
 {% endblock %}
