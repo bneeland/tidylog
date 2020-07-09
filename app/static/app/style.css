@@ -63,3 +63,11 @@ a:hover, .btn-link:hover {
   background: var(--blue-light);
   color: white;
 }
+
+.sidebarnav.active {
+  background: white;
+}
+
+.sidebarnav.active:hover {
+  background: var(--blue-light);
+}

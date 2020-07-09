@@ -24,9 +24,9 @@
       </div>
       <a href="{% url 'admin:index' %}" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
     </div>
-    <div class="col-2 col-log">
+    <div class="col-2 col-log p-1">
       {% for log in logs %}
-        <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
+        <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
       {% endfor %}
     </div>
   </div>

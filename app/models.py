@@ -65,6 +65,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "categories"
+
 class Entry(models.Model):
     log = models.ForeignKey(Log, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -85,3 +88,6 @@ class Entry(models.Model):
 
     def __str__(self):
         return str(self.created_at)
+
+    class Meta:
+        verbose_name_plural = "entries"

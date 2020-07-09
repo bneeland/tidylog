@@ -7,21 +7,27 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2 col-area">
+    <div class="col-2 col-area p-1">
       {% for area in areas %}
-        <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
-      {% endfor %}
-      <p>[Logged in as {{ user.email }}.]</p>
-      <p><a href="{% url 'logout' %}">Logout</a></p>
-      <p><a href="{% url 'password_change' %}">Change password</a></p>
-    </div>
-    <div class="col-2 col-log">
-      {% for log in logs %}
-        <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
+        <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
       {% endfor %}
       <hr>
-      <p><a href="{% url 'logout' %}">Logout</a></p>
-      <p><a href="{% url 'password_change' %}">Change password</a></p>
+      <div class="btn-group dropright btn-block">
+        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
+        </button>
+        <div class="dropdown-menu">
+          <span class="dropdown-item-text">{{ user.email }}</span>
+          <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+        </div>
+      </div>
+      <a href="{% url 'admin:index' %}" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
+    </div>
+    <div class="col-2 col-log p-1">
+      {% for log in logs %}
+        <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+      {% endfor %}
     </div>
     <div class="col-6 col-entry">
       <h2>Current area: {{ area.name }}</h2>
