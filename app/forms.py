@@ -25,3 +25,5 @@ class CreateEntryForm(forms.ModelForm):
         field_codes_to_pop = [fc for fc in field_codes_all if fc not in log_field_codes]
         for field_code_to_pop in field_codes_to_pop:
             self.fields.pop(field_code_to_pop)
+
+    # def save(self):
