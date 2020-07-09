@@ -9,11 +9,11 @@
     <p>This is in the log view.</p>
     <h1>Areas</h1>
     {% for area in areas %}
-      <p>{{ area }}</p>
+      <p><a href="{% url 'app:area' area.pk %}">{{ area }}</a></p>
     {% endfor %}
     <h1>Logs</h1>
     {% for log in logs %}
-      <p>{{ log }}</p>
+      <p><a href="{% url 'app:log' log.area.pk log.pk %}">{{ log }}</a></p>
     {% endfor %}
     <h1>New entry form</h1>
     <h2>Current area: {{ area.name }}</h2>
@@ -23,10 +23,11 @@
       <p>{{ entry }}</p>
     {% endfor %}
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit" class="btn btn-primary btn-block">
-      </form>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit" class="btn btn-primary btn-block">
+    </form>
+    <hr>
     <p><a href="{% url 'logout' %}">Logout</a></p>
     <p><a href="{% url 'password_change' %}">Change password</a></p>
 {% endblock %}

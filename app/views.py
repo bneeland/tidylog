@@ -27,12 +27,13 @@ class LogsMixin(ContextMixin):
 
 # Views
 
-class Home(LoginRequiredMixin, AreasMixin, LogsMixin, TemplateView):
+class Home(LoginRequiredMixin, AreasMixin, TemplateView):
     login_url = "login"
     template_name = "app/home.html"
 
-# class CreateLog(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
-#
+class Area(LoginRequiredMixin, AreasMixin, LogsMixin, TemplateView):
+    login_url = "login"
+    template_name = "app/area.html"
 
 class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
     login_url = "login"
@@ -40,7 +41,6 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
     template_name = "app/log.html"
     form_class = forms.CreateEntryForm
     success_url = reverse_lazy('app:log')
-    # fields = ['category']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

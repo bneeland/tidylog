@@ -26,4 +26,9 @@ class CreateEntryForm(forms.ModelForm):
         for field_code_to_pop in field_codes_to_pop:
             self.fields.pop(field_code_to_pop)
 
-    
+    def save(self):
+        entry = super(CreateEntryForm, self).save(commit=False)
+        entry.user = self.user
+        entry.log = models.Log.objects.filter(pk=self.log_pk)[0]
+        entry.save()
+        return entry
