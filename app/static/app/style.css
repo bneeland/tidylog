@@ -44,6 +44,7 @@ body {
 
 .col-acknowledge {
   background: var(--grey1);
+  color: var(--grey3);
 }
 
 .col-acknowledge a, .col-acknowledge button {

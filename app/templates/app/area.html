@@ -9,6 +9,7 @@
   <div class="row h-100">
 
     <div class="col-2 col-area p-1">
+      <p class="text-center"><small>AREAS</small></p>
       {% for area in areas %}
         <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
       {% endfor %}
@@ -27,6 +28,7 @@
     </div>
 
     <div class="col-2 col-log p-1">
+      <p class="text-center"><small>LOGS</small></p>
       {% for log in logs %}
         <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
       {% endfor %}
