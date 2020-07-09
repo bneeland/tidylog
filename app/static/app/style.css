@@ -1,3 +1,36 @@
+:root {
+  --blue-dark: #5084F8;
+  --blue-light: #6190F8;
+  --green: #43B581;
+  --black: #33363A;
+  --grey1: #4F5660;
+  --grey2: #747F8D;
+  --grey3: #E3E5E8;
+  --grey4: #F2F3F5;
+}
+
 body {
-  background: steelblue;
+  font-family: 'Roboto', sans-serif;
+  color: var(--black);
+}
+
+a, .btn-link {
+  color: var(--blue-dark);
+}
+
+a:hover, .btn-link:hover {
+  color: var(--blue-light);
+  text-decoration: none;
+}
+
+.btn {
+  border: none;
+}
+
+.btn-primary {
+  background: var(--blue-dark);
+}
+
+.btn-primary:hover {
+  background: var(--blue-light);
 }
