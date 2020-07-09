@@ -55,11 +55,13 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         context['entries'] = models.Entry.objects.filter(log=log)
         return context
 
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs.update({'user': self.request.user})
-    #     return kwargs
-
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user,
+            'log_pk': self.kwargs['log_pk'],
+        })
+        return kwargs
 
 
 
