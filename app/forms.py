@@ -26,4 +26,4 @@ class CreateEntryForm(forms.ModelForm):
         for field_code_to_pop in field_codes_to_pop:
             self.fields.pop(field_code_to_pop)
 
-    # def save(self):
+    

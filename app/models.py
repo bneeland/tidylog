@@ -84,4 +84,4 @@ class Entry(models.Model):
     FF2 = models.FloatField(blank=True, null=True)
 
     def __str__(self):
-        return self.created_at
+        return str(self.created_at)
