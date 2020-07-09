@@ -44,8 +44,9 @@
         <thead>
           <tr>
             <th scope="col"><b>Date/time</b></th>
-            {% for heading in headings %}
-              <th scope="col"><b>{{ heading.name }}</b></th>
+            <th scope="col"><b>Category</b></th>
+            {% for field in fields %}
+              <th scope="col"><b>{{ field.name }}</b></th>
             {% endfor %}
           </tr>
         </thead>
@@ -53,8 +54,10 @@
           {% for entry in entries %}
             <tr id="table_rows">
                 <td>{{ entry.created_at }}</td>
-                <td>{{ entry.CF1 }}</td>
-                <td>{{ entry.TF1 }}</td>
+                <td>{{ entry.category }}</td>
+                {% for field in fields %}
+                  <td>{{ field.type }} - {{ entry.TF1 }}</td>
+                {% endfor %}
             </tr>
           {% endfor %}
         </tbody>
@@ -64,7 +67,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">New entry</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -75,7 +78,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Submit" class="btn btn-primary btn-block">
-                <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
               </form>
 
             </div>

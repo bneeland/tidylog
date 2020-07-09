@@ -55,7 +55,7 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         context['entries'] = models.Entry.objects.filter(log=log)
         # Get headings for current log
         log_fields_qs = log.fields.all()
-        context['headings'] = log_fields_qs
+        context['fields'] = log_fields_qs
         return context
 
     def get_form_kwargs(self):
