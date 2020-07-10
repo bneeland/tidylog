@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load templatetags %}
+
 {% block title %}Logs{% endblock %}
 
 {% block content %}
@@ -59,7 +61,7 @@
                 <td>{{ entry.created_at }}</td>
                 <td>{{ entry.category }}</td>
                 {% for field in fields %}
-                  <td>{{ field.type }} - {{ entry__field }}</td>
+                  <td>{{ entry|get_obj_attr:field.type }}</td>
                 {% endfor %}
                 <td>{{ entry.user }}</td>
             </tr>

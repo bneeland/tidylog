@@ -58,7 +58,12 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         entries = models.Entry.objects.filter(log=log)
         context['entries'] = entries
 
-
+        """
+        Let it be known that I spent like 5 hours trying to make this work, and,
+        in the end, there was an easy fix (template tags) that I should have found
+        much earlier. I just didn't think of googling if there was a better way
+        until just now, and them I implemented the right fix in like 5 minutes.
+        """
         # entries_list = []
         # i = 0
         # for log_field in log_fields_qs:
@@ -75,6 +80,7 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         # context['entries'] = entries_list
 
         # print("ENTRIES_VALUES________", entries.values(log_fields_qs[0].type))
+
         return context
 
     def get_form_kwargs(self):
