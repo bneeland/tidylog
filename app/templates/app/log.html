@@ -8,7 +8,7 @@
 <div class="container-fluid h-100">
   <div class="row h-100">
 
-    <div class="col-2 col-area p-1">
+    <div class="col-1 col-area p-1">
       <p class="text-center"><small>AREAS</small></p>
       {% for area in areas %}
         <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
@@ -27,14 +27,14 @@
       <a href="#" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
     </div>
 
-    <div class="col-2 col-log p-1">
+    <div class="col-1 col-log p-1">
       <p class="text-center"><small>LOGS</small></p>
       {% for log in logs %}
         <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
       {% endfor %}
     </div>
 
-    <div class="col-6 col-entry">
+    <div class="col-8 col-entry">
       <div class="tools mt-1 mb-3">
         <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
         <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
@@ -50,6 +50,7 @@
             {% for field in fields %}
               <th scope="col"><b>{{ field.name }}</b></th>
             {% endfor %}
+            <th scope="col"><b>Employee</b></th>
           </tr>
         </thead>
         <tbody>
@@ -58,8 +59,9 @@
                 <td>{{ entry.created_at }}</td>
                 <td>{{ entry.category }}</td>
                 {% for field in fields %}
-                  <td>{{ field.type }} - {{ entry.TF1 }}</td>
+                  <td>{{ field.type }} - {{ entry__field }}</td>
                 {% endfor %}
+                <td>{{ entry.user }}</td>
             </tr>
           {% endfor %}
         </tbody>

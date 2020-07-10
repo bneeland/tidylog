@@ -51,11 +51,30 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         log_pk = self.kwargs['log_pk']
         log = models.Log.objects.get(pk=log_pk)
         context['log'] = log
-        # Get entries
-        context['entries'] = models.Entry.objects.filter(log=log)
         # Get headings for current log
         log_fields_qs = log.fields.all()
         context['fields'] = log_fields_qs
+        # Get entries
+        entries = models.Entry.objects.filter(log=log)
+        context['entries'] = entries
+
+
+        # entries_list = []
+        # i = 0
+        # for log_field in log_fields_qs:
+        #     entry_values = list(entries.values(log_field.type))
+        #     print("entry_values type", type(list(entries.values(log_field.type))))
+        #     if i == 0:
+        #         entries_list = entry_values
+        #     else:
+        #         entries_list = list(zip(entries_list, entry_values))
+        #         print("entries_list type", type(entries_list))
+        #     # entries_list.append(entries.values(log_field.type))
+        #     i += 1
+        # print("entries_list", entries_list)
+        # context['entries'] = entries_list
+
+        # print("ENTRIES_VALUES________", entries.values(log_fields_qs[0].type))
         return context
 
     def get_form_kwargs(self):
