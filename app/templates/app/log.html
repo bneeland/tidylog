@@ -4,45 +4,55 @@
 
 {% load templatetags %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Logs{% endblock %}
 
 {% block content %}
 <div class="container-fluid h-100">
   <div class="row h-100">
 
-    <div class="col-1 col-area p-1">
-      <p class="text-center"><small>AREAS</small></p>
-      {% for area in areas %}
-        <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
-      {% endfor %}
-      <hr>
-      <div class="btn-group dropright btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </button>
-        <div class="dropdown-menu">
-          <span class="dropdown-item-text">{{ user.email }}</span>
-          <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
-          <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+    <div class="col-3">
+
+      <div class="row h-100">
+
+        <div class="col col-area p-2">
+          <!-- <p class="text-center"><small>AREAS</small></p> -->
+          {% for area in areas %}
+            <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+          {% endfor %}
+          <hr>
+          <div class="btn-group dropright btn-block">
+            <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </button>
+            <div class="dropdown-menu">
+              <span class="dropdown-item-text">{{ user.email }}</span>
+              <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+            </div>
+          </div>
+          <a href="#" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
         </div>
+
+        <div class="col col-log p-2">
+          <!-- <p class="text-center"><small>LOGS</small></p> -->
+          {% for log in logs %}
+            <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+          {% endfor %}
+        </div>
+
       </div>
-      <a href="#" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
+
     </div>
 
-    <div class="col-1 col-log p-1">
-      <p class="text-center"><small>LOGS</small></p>
-      {% for log in logs %}
-        <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
-      {% endfor %}
-    </div>
-
-    <div class="col-8 col-entry">
-      <div class="tools mt-1 mb-3">
+    <div class="col-7 col-entry py-2 px-4">
+      <div class="tools mb-3">
         <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
         <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
-        <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search">
-        Filter by date
+        <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
+        <!-- Filter by date -->
       </div>
       <table class="table" id="myTable">
         <thead>
@@ -82,7 +92,7 @@
 
               <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <input type="submit" value="Submit" class="btn btn-primary btn-block">
                 <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
               </form>
@@ -98,8 +108,8 @@
 
     </div>
 
-    <div class="col-2 col-acknowledge p-1">
-      <p class="text-center"><small>ACKNOWLEDGEMENTS</small></p>
+    <div class="col-2 col-acknowledge p-2">
+      <!-- <p class="text-center"><small>ACKNOWLEDGEMENTS</small></p> -->
       <div class="btn-group dropdown btn-block">
         <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Unit lead
