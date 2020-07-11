@@ -31,12 +31,12 @@
           {% endfor %}
 
           <div class="border-top mt-2">
-            <div class="btn-group dropright btn-block">
+            <div class="btn-group dropdown btn-block">
               <button type="button" class="btn btn-link dropdown-toggle mt-2 sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account
               </button>
-              <div class="dropdown-menu">
-                <span class="dropdown-item-text">{{ user.email }}</span>
+              <div class="dropdown-menu" style="width:100%;">
+                {% comment %}<span class="dropdown-item-text">{{ user.email }}</span>{% endcomment %}
                 <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
               </div>
@@ -67,9 +67,10 @@
               Acknowledgements
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" type="button">Action</button>
-              <button class="dropdown-item" type="button">Another action</button>
-              <button class="dropdown-item" type="button">Something else here</button>
+              <button class="dropdown-item" type="button">Unit lead</button>
+              <button class="dropdown-item" type="button">Superintendent</button>
+              <button class="dropdown-item" type="button">Engineering</button>
+              <button class="dropdown-item" type="button">New shift</button>
             </div>
           </div>
         </div>
@@ -133,46 +134,6 @@
       </div>
 
     </div>
-
-    {% comment %}<div class="col-1 col-acknowledge p-2 ml-auto fixed-top overflow-auto h-100">
-      <!-- <p class="text-center"><small>ACKNOWLEDGEMENTS</small></p> -->
-      <div class="btn-group dropdown btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Unit lead
-        </button>
-        <div class="dropdown-menu">
-          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
-          <a class="dropdown-item" href="#">Acknowledge</a>
-        </div>
-      </div>
-      <div class="btn-group dropdown btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Superintendent
-        </button>
-        <div class="dropdown-menu">
-          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
-          <a class="dropdown-item" href="#">Acknowledge</a>
-        </div>
-      </div>
-      <div class="btn-group dropdown btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Engineering
-        </button>
-        <div class="dropdown-menu">
-          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
-          <a class="dropdown-item" href="#">Acknowledge</a>
-        </div>
-      </div>
-      <div class="btn-group dropdown btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          New shift
-        </button>
-        <div class="dropdown-menu">
-          <!-- <a href="#" class="btn btn-primary btn-block" role="button">Acknowledge</a> -->
-          <a class="dropdown-item" href="#">Acknowledge</a>
-        </div>
-      </div>
-    </div>{% endcomment %}
 
   </div>
 
