@@ -33,7 +33,7 @@ body {
   color: var(--grey3);
 }
 
-.col-log a, .col-area button {
+.col-log a, .col-log button {
   color: var(--grey3);
   text-align: left;
 }
