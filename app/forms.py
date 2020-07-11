@@ -21,7 +21,6 @@ class CreateEntryForm(forms.ModelForm):
         log = log_qs[0]
         log_fields_qs = log.fields.all()
         log_field_codes = [log_field.type for log_field in log_fields_qs]
-        print("log_field_codes", log_field_codes)
 
         # Get all field codes
         FIELD_BANK = models.Field.FIELD_BANK
@@ -31,9 +30,6 @@ class CreateEntryForm(forms.ModelForm):
         field_codes_to_pop = [fc for fc in field_codes_all if fc not in log_field_codes]
         for field_code_to_pop in field_codes_to_pop:
             self.fields.pop(field_code_to_pop)
-
-        # # Get list of field labels
-        # field_keys = self.fields.keys()
 
         # Set field labels
         for code in log_field_codes:

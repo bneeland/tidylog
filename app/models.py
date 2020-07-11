@@ -27,7 +27,7 @@ class Field(models.Model):
 class Log(models.Model):
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    fields = models.ManyToManyField(Field, blank=True, null=True)
+    fields = models.ManyToManyField(Field, blank=True)
 
     def __str__(self):
         return self.name
