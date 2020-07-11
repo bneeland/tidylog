@@ -35,7 +35,7 @@
               <button type="button" class="btn btn-link dropdown-toggle mt-2 sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account
               </button>
-              <div class="dropdown-menu" style="width:100%;">
+              <div class="dropdown-menu">
                 {% comment %}<span class="dropdown-item-text">{{ user.email }}</span>{% endcomment %}
                 <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
