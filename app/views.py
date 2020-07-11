@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, resolve
 from django.views.generic.base import ContextMixin
 
 from . import models
@@ -92,7 +92,33 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse_lazy('app:log', kwargs={'area_pk': self.kwargs['area_pk'], 'log_pk': self.kwargs['log_pk'],})
+        current_url_name = resolve(self.request.path_info).url_name
+        cuffent_url_name_complete = 'app:'+current_url_name
+
+        if current_url_name == 'log':
+            return reverse_lazy(cuffent_url_name_complete, kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+            })
+        elif current_url_name == 'log_1_day':
+            return reverse_lazy(cuffent_url_name_complete, kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+                'year': self.kwargs['year'],
+                'month': self.kwargs['month'],
+                'day': self.kwargs['day'],
+            })
+        elif current_url_name == 'log_date_range':
+            return reverse_lazy(cuffent_url_name_complete, kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+                'year_start': self.kwargs['year_start'],
+                'month_start': self.kwargs['month_start'],
+                'day_start': self.kwargs['day_start'],
+                'year_end': self.kwargs['year_end'],
+                'month_end': self.kwargs['month_end'],
+                'day_end': self.kwargs['day_end'],
+            })
 
     # def form_valid(self, form):
     #     form.instance.user = self.request.user
