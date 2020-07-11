@@ -12,18 +12,18 @@
 <div class="container-fluid">
   <div class="row">
 
-    <!-- <div class="col-lg-3"> -->
+    <!-- <div class="col-3"> -->
 
       <!-- <div class="row h-100"> -->
 
-        <div class="col-lg-1 col-area p-2 fixed-top overflow-auto h-100">
+        <div class="col-1 col-area p-2 fixed-top overflow-auto h-100">
           <!-- <p class="text-center"><small>AREAS</small></p> -->
           {% for area in areas %}
             <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
           {% endfor %}
         </div>
 
-        <div class="col-lg-2 col-log p-2 offset-lg-1 fixed-top overflow-auto h-100">
+        <div class="col-2 col-log p-2 offset-1 fixed-top overflow-auto h-100">
 
           <!-- <p class="text-center"><small>LOGS</small></p> -->
           {% for log in logs %}
@@ -50,14 +50,36 @@
 
     <!-- </div> -->
 
-    <div class="col-lg-7 col-entry py-2 px-4 offset-lg-3">
-      <div class="tools mb-3">
+    <div class="col-9 col-entry offset-3 fixed-top">
+
+      <div class="row p-2 border-bottom">
+
         <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
         <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
+        <div class="col p-0">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
+        </div>
         <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
         <!-- Filter by date -->
+        <div class="col p-0 text-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Acknowledgements
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" type="button">Action</button>
+              <button class="dropdown-item" type="button">Another action</button>
+              <button class="dropdown-item" type="button">Something else here</button>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+    </div>
+
+    <div class="col-9 col-entry p-2 mt-5 ml-auto">
+
       <table class="table" id="myTable">
         <thead>
           <tr>
@@ -112,7 +134,7 @@
 
     </div>
 
-    <div class="col-lg-2 col-acknowledge p-2 ml-auto fixed-top overflow-auto h-100">
+    {% comment %}<div class="col-1 col-acknowledge p-2 ml-auto fixed-top overflow-auto h-100">
       <!-- <p class="text-center"><small>ACKNOWLEDGEMENTS</small></p> -->
       <div class="btn-group dropdown btn-block">
         <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -150,7 +172,7 @@
           <a class="dropdown-item" href="#">Acknowledge</a>
         </div>
       </div>
-    </div>
+    </div>{% endcomment %}
 
   </div>
 
