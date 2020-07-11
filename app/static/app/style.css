@@ -85,3 +85,7 @@ a:hover, .btn-link:hover {
 .sidebarnav.active:hover {
   background: var(--blue-light);
 }
+
+.table th {
+  border-top: 0;
+}
