@@ -82,8 +82,8 @@
           <div class="pl-2">
             {% if url_name == 'log_1_day' %}
               <span class="btn btn-text">{{ view.kwargs.year }}-{{ view.kwargs.month|stringformat:"02d" }}-{{ view.kwargs.day|stringformat:"02d" }}</span>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk view.kwargs.year view.kwargs.month view.kwargs.day|add:'-1' %}"><i class="fas fa-angle-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk view.kwargs.year view.kwargs.month view.kwargs.day|add:'1' %}"><i class="fas fa-angle-right"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk date_remove|date:'Y' date_remove|date:'m' date_remove|date:'d' %}"><i class="fas fa-angle-left"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk date_add|date:'Y' date_add|date:'m' date_add|date:'d' %}"><i class="fas fa-angle-right"></i></a>
             {% endif %}
           </div>
 

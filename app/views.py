@@ -74,6 +74,12 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             day = self.kwargs['day']
 
             date = timezone.make_aware(datetime.datetime(year, month, day))
+
+            date_remove = date - datetime.timedelta(days=1)
+            date_add = date + datetime.timedelta(days=1)
+            context['date_remove'] = date_remove
+            context['date_add'] = date_add
+
             # context['year'] = year
             # context['month'] = month
             # context['day'] = day
