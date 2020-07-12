@@ -64,6 +64,7 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
 
         # Filter for 1-day / date-range views
         url_name = resolve(self.request.path_info).url_name
+        context['url_name'] = url_name
 
         if url_name == "log_1_day":
             year = self.kwargs['year']

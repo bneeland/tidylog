@@ -79,6 +79,15 @@
           </div>
         <!-- </div> -->
 
+          <div class="pl-2">
+            {% if url_name == 'log_1_day' %}
+              <span class="py-2 pr-2">{{ view.kwargs.year }}-{{ view.kwargs.month }}-{{ view.kwargs.day }}</span>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk view.kwargs.year view.kwargs.month view.kwargs.day|add_remove_day:'remove' %}"><i class="fas fa-angle-left"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk view.kwargs.year view.kwargs.month view.kwargs.day|add_remove_day:'add' %}"><i class="fas fa-angle-right"></i></a>
+            {% endif %}
+          </div>
+
+
         <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
         <!-- Filter by date -->
         <!-- <div class="col p-0 text-right"> -->
@@ -120,12 +129,14 @@
                 <td>{{ entry.created_at }}</td>
                 <td>{{ entry.category }}</td>
                 {% for field in fields %}
-                  <td>{{ entry|get_obj_attr:field.type }}</td>
+                  <td>{{ entry|get_object_attribute:field.type }}</td>
                 {% endfor %}
                 <td>{{ entry.user }}</td>
             </tr>
           {% empty %}
-            No entries to display
+            <tr id="table_rows">
+              <td>No entries</td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>
