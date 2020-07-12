@@ -62,13 +62,13 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
         context['fields'] = log_fields_qs
 
         # Get entries
-        entries = models.Entry.objects.filter(log=log)
+        entries = models.Entry.objects.filter(log=log).order_by('-created_at')
 
-        # Filter for 1-day / date-range views
+        # Filter for daily / date-range views
         url_name = resolve(self.request.path_info).url_name
         context['url_name'] = url_name
 
-        if url_name == "log_1_day":
+        if url_name == "log_daily":
             year = self.kwargs['year']
             month = self.kwargs['month']
             day = self.kwargs['day']
@@ -96,7 +96,7 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             day_end = self.kwargs['day_end']
 
             date_start = timezone.make_aware(datetime.datetime(year_start, month_start, day_start))
-            date_end = timezone.make_aware(datetime.datetime(year_end, month_end, day_end+1))
+            date_end = timezone.make_aware(datetime.datetime(year_end, month_end, day_end))
 
             # context['year_start'] = year_start
             # context['month_start'] = month_start
@@ -131,7 +131,7 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
                 'area_pk': self.kwargs['area_pk'],
                 'log_pk': self.kwargs['log_pk'],
             })
-        elif url_name == 'log_1_day':
+        elif url_name == 'log_daily':
             return reverse_lazy(url_name_complete, kwargs={
                 'area_pk': self.kwargs['area_pk'],
                 'log_pk': self.kwargs['log_pk'],
