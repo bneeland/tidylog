@@ -70,9 +70,9 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             month = self.kwargs['month']
             day = self.kwargs['day']
 
-            context['year'] = year
-            context['month'] = month
-            context['day'] = day
+            # context['year'] = year
+            # context['month'] = month
+            # context['day'] = day
 
             entries = entries.filter(created_at__date=datetime.date(year, month, day))
 
@@ -84,12 +84,12 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             month_end = self.kwargs['month_end']
             day_end = self.kwargs['day_end']
 
-            context['year_start'] = year_start
-            context['month_start'] = month_start
-            context['day_start'] = day_start
-            context['year_end'] = year_end
-            context['month_end'] = month_end
-            context['day_end'] = day_end
+            # context['year_start'] = year_start
+            # context['month_start'] = month_start
+            # context['day_start'] = day_start
+            # context['year_end'] = year_end
+            # context['month_end'] = month_end
+            # context['day_end'] = day_end
 
             entries = entries.filter(created_at__gte=datetime.date(year_start, month_start, day_start)).filter()
             entries = entries.filter(created_at__lte=datetime.date(year_end, month_end, day_end+1)).filter()

@@ -20,6 +20,8 @@
           <!-- <p class="text-center"><small>AREAS</small></p> -->
           {% for area in areas %}
             <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+          {% empty %}
+            No areas to display
           {% endfor %}
         </div>
 
@@ -28,6 +30,8 @@
           <!-- <p class="text-center"><small>LOGS</small></p> -->
           {% for log in logs %}
             <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+          {% empty %}
+            No logs to display
           {% endfor %}
 
           <div class="border-top mt-2">
@@ -56,24 +60,42 @@
 
         <!-- {% comment %}<h2>Current area: {{ area.name }}</h2>
         <h2>Current log: {{ log.name }}</h2>{% endcomment %} -->
-        <div class="col p-0">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add entry</button>
-        </div>
-        <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
-        <!-- Filter by date -->
-        <div class="col p-0 text-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Acknowledgements
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" type="button">Unit lead</button>
-              <button class="dropdown-item" type="button">Superintendent</button>
-              <button class="dropdown-item" type="button">Engineering</button>
-              <button class="dropdown-item" type="button">New shift</button>
+        <!-- <div class="col p-0"> -->
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_entry">Add entry</button>
+          </div>
+        <!-- </div> -->
+        <!-- <div class="col p-0"> -->
+          {% comment %}{{ view.kwargs.year }}{% endcomment %}
+          <div class="pl-2">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log' area.pk log.pk %}">All dates</a>
+              {% now "Y" as current_year %}
+              {% now "m" as current_month %}
+              {% now "d" as current_day %}
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_1_day' area.pk log.pk current_year current_month current_day %}">1 day</a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range'  area.pk log.pk 2020 07 09 2020 07 10 %}"">Date range</a>
             </div>
           </div>
-        </div>
+        <!-- </div> -->
+
+        <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
+        <!-- Filter by date -->
+        <!-- <div class="col p-0 text-right"> -->
+          <div class="ml-auto">
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Acknowledgements
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">Unit lead</button>
+                <button class="dropdown-item" type="button">Superintendent</button>
+                <button class="dropdown-item" type="button">Engineering</button>
+                <button class="dropdown-item" type="button">New shift</button>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
 
       </div>
 
@@ -84,12 +106,12 @@
       <table class="table" id="myTable">
         <thead>
           <tr>
-            <th scope="col"><b>Date/time</b></th>
-            <th scope="col"><b>Category</b></th>
+            <th scope="col">Date/time</th>
+            <th scope="col">Category</th>
             {% for field in fields %}
-              <th scope="col"><b>{{ field.name }}</b></th>
+              <th scope="col">{{ field.name }}</th>
             {% endfor %}
-            <th scope="col"><b>Employee</b></th>
+            <th scope="col">Employee</th>
           </tr>
         </thead>
         <tbody>
@@ -102,15 +124,17 @@
                 {% endfor %}
                 <td>{{ entry.user }}</td>
             </tr>
+          {% empty %}
+            No entries to display
           {% endfor %}
         </tbody>
       </table>
 
-      <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal" id="add_entry" tabindex="-1" role="dialog" aria-labelledby="add_entry_label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New entry</h5>
+              <h5 class="modal-title" id="add_entry_label">New entry</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
