@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, resolve
 from django.views.generic.base import ContextMixin
+from django.utils import timezone
+from django.conf import settings
 import datetime
 
 from . import models
@@ -71,11 +73,13 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             month = self.kwargs['month']
             day = self.kwargs['day']
 
+            date = timezone.make_aware(datetime.datetime(year, month, day))
             # context['year'] = year
             # context['month'] = month
             # context['day'] = day
 
-            entries = entries.filter(created_at__date=datetime.date(year, month, day))
+            # entries = entries.filter(created_at__date=timezone.localdate(year, month, day))
+            entries = entries.filter(created_at__date=timezone.localtime(date))
 
         if url_name == "log_date_range":
             year_start = self.kwargs['year_start']
@@ -85,6 +89,9 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             month_end = self.kwargs['month_end']
             day_end = self.kwargs['day_end']
 
+            date_start = timezone.make_aware(datetime.datetime(year_start, month_start, day_start))
+            date_end = timezone.make_aware(datetime.datetime(year_end, month_end, day_end+1))
+
             # context['year_start'] = year_start
             # context['month_start'] = month_start
             # context['day_start'] = day_start
@@ -92,8 +99,10 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
             # context['month_end'] = month_end
             # context['day_end'] = day_end
 
-            entries = entries.filter(created_at__gte=datetime.date(year_start, month_start, day_start)).filter()
-            entries = entries.filter(created_at__lte=datetime.date(year_end, month_end, day_end+1)).filter()
+            entries = entries.filter(
+                created_at__gte=timezone.localtime(timezone.localtime(date_start)),
+                created_at__lt=timezone.localtime(timezone.localtime(date_end)),
+            )
 
         context['entries'] = entries
 
