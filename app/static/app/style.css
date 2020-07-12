@@ -1,12 +1,12 @@
 :root {
-  --blue-dark: #5084F8;
-  --blue-light: #6190F8;
-  --green: #43B581;
-  --black: #33363A;
-  --grey4: #4F5660;
-  --grey3: #747F8D;
-  --grey2: #E3E5E8;
-  --grey1: #F2F3F5;
+  --tidy-blue-dark: #5084F8;
+  --tidy-blue-light: #6190F8;
+  --tidy-green: #43B581;
+  --tidy-black: #33363A;
+  --tidy-grey4: #4F5660;
+  --tidy-grey3: #747F8D;
+  --tidy-grey2: #E3E5E8;
+  --tidy-grey1: #F2F3F5;
 }
 
 html, body {
@@ -15,26 +15,26 @@ html, body {
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: var(--black);
+  color: var(--tidy-black);
 }
 
 .col-area {
-  background: var(--grey2);
-  color: var(--grey3);
+  background: var(--tidy-grey2);
+  color: var(--tidy-grey3);
 }
 
 .col-area a, .col-area button {
-  color: var(--grey3);
+  color: var(--tidy-grey3);
   text-align: left;
 }
 
 .col-log {
-  background: var(--grey1);
-  color: var(--grey3);
+  background: var(--tidy-grey1);
+  color: var(--tidy-grey3);
 }
 
 .col-log a, .col-log button {
-  color: var(--grey3);
+  color: var(--tidy-grey3);
   text-align: left;
 }
 
@@ -43,21 +43,21 @@ body {
 }
 
 .col-acknowledge {
-  background: var(--grey1);
-  color: var(--grey3);
+  background: var(--tidy-grey1);
+  color: var(--tidy-grey3);
 }
 
 .col-acknowledge a, .col-acknowledge button {
-  color: var(--grey3);
+  color: var(--tidy-grey3);
   text-align: left;
 }
 
 a, .btn-link {
-  color: var(--blue-dark);
+  color: var(--tidy-blue-dark);
 }
 
 a:hover, .btn-link:hover {
-  color: var(--blue-light);
+  color: var(--tidy-blue-light);
   text-decoration: none;
 }
 
@@ -66,24 +66,29 @@ a:hover, .btn-link:hover {
 }
 
 .btn-primary {
-  background: var(--blue-dark);
+  background: var(--tidy-blue-dark);
 }
 
 .btn-primary:hover {
-  background: var(--blue-light);
+  background: var(--tidy-blue-light);
 }
 
 .btn-secondary {
-  background: var(--grey2);
-  color: var(--grey3);
+  background: var(--tidy-grey2);
+  color: var(--tidy-grey3);
 }
 
 .btn-secondary:hover {
-  background: var(--blue-light);
+  background: var(--tidy-blue-light);
+}
+
+.btn:not(:disabled):not(.disabled).btn-text {
+  cursor: default;
+  color: var(--tidy-black);
 }
 
 .sidebarnav:hover {
-  background: var(--blue-light);
+  background: var(--tidy-blue-light);
   color: white;
 }
 
@@ -92,7 +97,11 @@ a:hover, .btn-link:hover {
 }
 
 .sidebarnav.active:hover {
-  background: var(--blue-light);
+  background: var(--tidy-blue-light);
+}
+
+.table {
+  color: var(--tidy-black);
 }
 
 .table th {
