@@ -89,9 +89,52 @@
 
 
         <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
-        <!-- Filter by date -->
-        <!-- <div class="col p-0 text-right"> -->
+
+{% comment %}
+Full path: {{request.get_full_path}}
+View name: {{request.resolver_match.url_name}}
+
+{% if view.kwargs.acknowledgements %}
+Full path to go to: {{request.get_host}}{{request.get_full_path}} but delete 'acknowledgements'<br>
+View name to go to: {{request.resolver_match.view_name}}
+{% else %}
+Full path to go to: {{request.get_host}}{{request.get_full_path}}/acknowledgements<br>
+View name to go to: {{request.resolver_match.view_name}}
+{% endif %}
+{% endcomment %}
+
+
+
+
+
+
           <div class="ml-auto">
+            {% with request.resolver_match.url_name as url_name %}
+
+              {% if url_name == "log" %}
+                {% if view.kwargs.acknowledgements %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                {% else %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                {% endif %}
+              {% elif url_name == "log_daily" %}
+                {% if view.kwargs.acknowledgements %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                {% else %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                {% endif %}
+              {% elif url_name == "log_date_range" %}
+                {% if view.kwargs.acknowledgements %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                {% else %}
+                  <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                {% endif %}
+              {% endif %}
+
+            {% endwith %}
+          </div>
+
+          <!-- <div class="ml-auto">
             <div class="btn-group">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Acknowledgements
@@ -103,8 +146,8 @@
                 <button class="dropdown-item" type="button">New shift</button>
               </div>
             </div>
-          </div>
-        <!-- </div> -->
+          </div> -->
+
 
       </div>
 
@@ -112,34 +155,56 @@
 
     <div class="col-9 col-entry p-2 mt-5 ml-auto">
 
-      <table class="table" id="myTable">
-        <thead>
-          <tr>
-            <th scope="col">Date/time</th>
-            <th scope="col">Category</th>
-            {% for field in fields %}
-              <th scope="col">{{ field.name }}</th>
-            {% endfor %}
-            <th scope="col">Employee</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for entry in entries %}
-            <tr id="table_rows">
-                <td>{{ entry.created_at }}</td>
-                <td>{{ entry.category }}</td>
+      {% if view.kwargs.acknowledgements %}
+
+        <div class="row">
+
+          <div class="col">
+
+            Acknowledgements
+
+          </div>
+
+        </div>
+
+      {% endif %}
+
+      <div class="row">
+
+        <div class="col">
+
+          <table class="table" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col">Date/time</th>
+                <th scope="col">Category</th>
                 {% for field in fields %}
-                  <td>{{ entry|get_object_attribute:field.type }}</td>
+                  <th scope="col">{{ field.name }}</th>
                 {% endfor %}
-                <td>{{ entry.user }}</td>
-            </tr>
-          {% empty %}
-            <tr id="table_rows">
-              <td>No entries</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+                <th scope="col">Employee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in entries %}
+                <tr id="table_rows">
+                    <td>{{ entry.created_at }}</td>
+                    <td>{{ entry.category }}</td>
+                    {% for field in fields %}
+                      <td>{{ entry|get_object_attribute:field.type }}</td>
+                    {% endfor %}
+                    <td>{{ entry.user }}</td>
+                </tr>
+              {% empty %}
+                <tr id="table_rows">
+                  <td>No entries to display for the dates you've selected</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
 
       <div class="modal" id="add_entry" tabindex="-1" role="dialog" aria-labelledby="add_entry_label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

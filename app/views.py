@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, resolve
@@ -150,3 +150,17 @@ class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
                 'month_end': self.kwargs['month_end'],
                 'day_end': self.kwargs['day_end'],
             })
+
+    # def get_acknowledgements_path(self):
+    #     url_name = resolve(self.request.path_info).url_name
+    #     url_name_complete = 'app:'+url_name
+    #
+    #     if acknowledgements in self.kwargs
+    #         if self.kwargs['acknowledgements']==True:
+    #             return reverse_lazy(url_name_complete, kwargs={
+    #                 'acknowledgements': False,
+    #             })
+    #         else:
+    #             return reverse_lazy(url_name_complete, kwargs={
+    #                 'acknowledgements': True,
+    #             })
