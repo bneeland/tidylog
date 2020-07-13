@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, FormView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy, resolve
 from django.views.generic.base import ContextMixin
 from django.utils import timezone
@@ -38,8 +38,9 @@ class Area(LoginRequiredMixin, AreasMixin, LogsMixin, TemplateView):
     login_url = "login"
     template_name = "app/area.html"
 
-class Log(LoginRequiredMixin, AreasMixin, LogsMixin, CreateView):
+class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, CreateView):
     login_url = "login"
+    permission_required = 'app.add_entry'
     model = models.Entry
     template_name = "app/log.html"
     form_class = forms.CreateEntryForm

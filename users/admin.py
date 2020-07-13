@@ -14,7 +14,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = models.CustomUser
-        fields = ('email', 'phone', 'address',)
+        fields = ('email', 'first_name', 'last_name',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -42,7 +42,7 @@ class CustomUserChangeForm(forms.ModelForm):
 
     class Meta:
         model = models.CustomUser
-        fields = ('email', 'password', 'phone', 'address', 'is_active', 'is_admin')
+        fields = ('email', 'password', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', )
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -59,19 +59,20 @@ class CustomUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'phone', 'address', 'is_admin')
-    list_filter = ('is_admin',)
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_superuser', )
+    list_filter = ('is_superuser',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Logistical information', {'fields': ('phone', 'address',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Personal information', {'fields': ('first_name', 'last_name', )}),
+        ('Groups', {'fields': ('groups',)}),
+        ('Permissions', {'fields': ('is_staff', 'is_superuser', )}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'phone', 'address', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)
@@ -81,6 +82,3 @@ class CustomUserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(models.CustomUser, CustomUserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)
