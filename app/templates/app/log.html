@@ -81,8 +81,13 @@
 
           <div class="pl-2">
             {% if url_name == 'log_daily' %}
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area.pk log.pk date_remove|date:'Y' date_remove|date:'m' date_remove|date:'d' %}"><i class="fas fa-angle-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area.pk log.pk date_add|date:'Y' date_add|date:'m' date_add|date:'d' %}"><i class="fas fa-angle-right"></i></a>
+              {% if view.kwargs.acknowledgements %}
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=True %}"><i class="fas fa-angle-left"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=True %}"><i class="fas fa-angle-right"></i></a>
+              {% else %}
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=False %}"><i class="fas fa-angle-left"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=False %}"><i class="fas fa-angle-right"></i></a>
+              {% endif %}
               <span class="btn btn-text">{{ view.kwargs.year }}-{{ view.kwargs.month|stringformat:"02d" }}-{{ view.kwargs.day|stringformat:"02d" }}</span>
             {% endif %}
           </div>
