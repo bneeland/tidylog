@@ -246,9 +246,11 @@
               <div class="modal-body">
 
                 <form method="post">
-                  {% csrf_token %}
-                  {{ form|crispy }}
-                  <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Acknowledgement comments</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <input type="submit" value="Submit" disabled class="btn btn-primary btn-block">
                   <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
                 </form>
 
