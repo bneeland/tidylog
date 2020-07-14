@@ -59,11 +59,18 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
         context['log'] = log
 
         # Get headings for current log
-        log_fields_qs = log.fields.all()
-        context['fields'] = log_fields_qs
+        # Entries
+        context['fields'] = log.fields.all()
+        # Acknowledgements
+        context['unit_lead_acknowledgement_fields'] = log.unit_lead_acknowledgement_fields.all()
+        context['superintendent_acknowledgement_fields'] = log.superintendent_acknowledgement_fields.all()
+        context['engineering_acknowledgement_fields'] = log.engineering_acknowledgement_fields.all()
+        context['new_shift_acknowledgement_fields'] = log.new_shift_acknowledgement_fields.all()
 
         # Get entries
         entries = models.Entry.objects.filter(log=log).order_by('-created_at')
+        # Get acknowledgements
+        acknowledgements = models.Acknowledgement.objects.filter(log=log).order_by('-created_at')
 
         # Filter for daily / date-range views
         url_name = resolve(self.request.path_info).url_name
@@ -81,12 +88,8 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
             context['date_remove'] = date_remove
             context['date_add'] = date_add
 
-            # context['year'] = year
-            # context['month'] = month
-            # context['day'] = day
-
-            # entries = entries.filter(created_at__date=timezone.localdate(year, month, day))
             entries = entries.filter(created_at__date=timezone.localtime(date))
+            acknowledgements = acknowledgements.filter(created_at__date=timezone.localtime(date))
 
         if url_name == "log_date_range":
             year_start = self.kwargs['year_start']
@@ -99,19 +102,23 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
             date_start = timezone.make_aware(datetime.datetime(year_start, month_start, day_start))
             date_end = timezone.make_aware(datetime.datetime(year_end, month_end, day_end))
 
-            # context['year_start'] = year_start
-            # context['month_start'] = month_start
-            # context['day_start'] = day_start
-            # context['year_end'] = year_end
-            # context['month_end'] = month_end
-            # context['day_end'] = day_end
-
             entries = entries.filter(
+                created_at__gte=timezone.localtime(timezone.localtime(date_start)),
+                created_at__lt=timezone.localtime(timezone.localtime(date_end)),
+            )
+            acknowledgements = acknowledgements.filter(
                 created_at__gte=timezone.localtime(timezone.localtime(date_start)),
                 created_at__lt=timezone.localtime(timezone.localtime(date_end)),
             )
 
         context['entries'] = entries
+
+        # Filter acknowledgements by group
+        context['unit_lead_acknowledgements'] = acknowledgements.filter(group__name="Unit lead")
+        context['superintendent_acknowledgements'] = acknowledgements.filter(group__name="Superintendent")
+        context['engineering_acknowledgements'] = acknowledgements.filter(group__name="Engineering")
+        context['new_shift_acknowledgements'] = acknowledgements.filter(group__name="Operator")
+
 
         return context
 
@@ -151,17 +158,3 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
                 'month_end': self.kwargs['month_end'],
                 'day_end': self.kwargs['day_end'],
             })
-
-    # def get_acknowledgements_path(self):
-    #     url_name = resolve(self.request.path_info).url_name
-    #     url_name_complete = 'app:'+url_name
-    #
-    #     if acknowledgements in self.kwargs
-    #         if self.kwargs['acknowledgements']==True:
-    #             return reverse_lazy(url_name_complete, kwargs={
-    #                 'acknowledgements': False,
-    #             })
-    #         else:
-    #             return reverse_lazy(url_name_complete, kwargs={
-    #                 'acknowledgements': True,
-    #             })
