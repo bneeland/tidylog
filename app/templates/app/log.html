@@ -125,16 +125,16 @@
 
       {% if view.kwargs.acknowledgements %}
 
-        <div class="row row-acknowledgements py-3 bg-light">
+        <div class="row row-acknowledgement pt-3">
 
           <div class="col">
-            
+
             <div class="row">
               <div class="col-4">
-                <span class="font-weight-bold">Unit lead</span> {% if unit_lead_acknowledgements %}Acknowledged{% else %}Not acknowledged{% endif %}
+                <span class="font-weight-bold">Unit lead</span> {% if unit_lead_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
               </div>
-              {% if unit_lead_acknowledgements %}
-                <div class="col-8">
+              <div class="col-8">
+                {% if unit_lead_acknowledgements %}
                   {% for acknowledgement in unit_lead_acknowledgements %}
                     <p>{{ acknowledgement.created_at }}</p>
                     {% for field in unit_lead_acknowledgement_fields %}
@@ -142,43 +142,125 @@
                         {{ acknowledgement|get_object_attribute:field.type }}</p>
                     {% endfor %}
                   {% endfor %}
-                </div>
-              {% endif %}
+                {% else %}
+                  <p>
+                    {% if user|has_group:"Unit lead" %}
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                    {% else %}
+                      &mdash;
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
             </div>
 
-            <span class="font-weight-bold">Superintendent</span> {% if superintendent_acknowledgements %}Acknowledged{% else %}Not acknowledged{% endif %}
-            {% if superintendent_acknowledgements %}
-              {% for acknowledgement in superintendent_acknowledgements %}
-                <p>{{ acknowledgement.created_at }}</p>
-                {% for field in unit_lead_acknowledgement_fields %}
-                  <p><span class="font-weight-bold">{{ field.name }}</span><br>
-                    {{ acknowledgement|get_object_attribute:field.type }}</p>
-                {% endfor %}
-              {% endfor %}
-            {% endif %}
+            <div class="row">
+              <div class="col-4">
+                <span class="font-weight-bold">Superintendent</span> {% if superintendent_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
+              </div>
+              <div class="col-8">
+                {% if superintendent_acknowledgements %}
+                  {% for acknowledgement in superintendent_acknowledgements %}
+                    <p>{{ acknowledgement.created_at }}</p>
+                    {% for field in superintendent_acknowledgement_fields %}
+                      <p><span class="font-weight-bold">{{ field.name }}</span><br>
+                        {{ acknowledgement|get_object_attribute:field.type }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% else %}
+                  <p>
+                    {% if user|has_group:"Superintendent" %}
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                    {% else %}
+                      &mdash;
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
 
-            {% if superintendent_acknowledgements %}
-              {% for acknowledgement in superintendent_acknowledgements %}
-                {{ acknowledgement.created_at }}
-                {{ acknowledgement.group }}
-              {% endfor %}
-            {% endif %}
-            {% if engineering_acknowledgements %}
-              {% for acknowledgement in engineering_acknowledgements %}
-                {{ acknowledgement.created_at }}
-                {{ acknowledgement.group }}
-              {% endfor %}
-            {% endif %}
-            {% if new_shift_acknowledgements %}
-              {% for acknowledgement in new_shift_acknowledgements %}
-                {{ acknowledgement.created_at }}
-                {{ acknowledgement.group }}
-              {% endfor %}
-            {% endif %}
+            <div class="row">
+              <div class="col-4">
+                <span class="font-weight-bold">Engineering</span> {% if engineering_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
+              </div>
+              <div class="col-8">
+                {% if engineering_acknowledgements %}
+                  {% for acknowledgement in engineering_acknowledgements %}
+                    <p>{{ acknowledgement.created_at }}</p>
+                    {% for field in engineering_acknowledgement_fields %}
+                      <p><span class="font-weight-bold">{{ field.name }}</span><br>
+                        {{ acknowledgement|get_object_attribute:field.type }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% else %}
+                  <p>
+                    {% if user|has_group:"Engineering" %}
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                    {% else %}
+                      &mdash;
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4">
+                <span class="font-weight-bold">New shift</span> {% if new_shift_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
+              </div>
+              <div class="col-8">
+                {% if new_shift_acknowledgements %}
+                  {% for acknowledgement in new_shift_acknowledgements %}
+                    <p>{{ acknowledgement.created_at }}</p>
+                    {% for field in new_shift_acknowledgement_fields %}
+                      <p><span class="font-weight-bold">{{ field.name }}</span><br>
+                        {{ acknowledgement|get_object_attribute:field.type }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% else %}
+                  <p>
+                    {% if user|has_group:"Operator" %}
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                    {% else %}
+                      &mdash;
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
 
           </div>
 
         </div>
+
+
+        <div class="modal" id="add_acknowledgement" tabindex="-1" role="dialog" aria-labelledby="add_acknowledgement_label" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_acknowledgement_label">Acknowledgement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                  <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
+                </form>
+
+              </div>
+              <!-- <div class="modal-footer">
+
+                <input type="submit" value="Submit" class="btn btn-primary btn-block">
+              </div> -->
+            </div>
+          </div>
+        </div>
+
 
         {% comment %}<div class="row pt-3">
 
@@ -237,7 +319,7 @@
                     {% for field in fields %}
                       <td>{{ entry|get_object_attribute:field.type }}</td>
                     {% endfor %}
-                    <td>{{ entry.user }}</td>
+                    <td>{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
                 </tr>
               {% empty %}
                 <tr id="table_rows">

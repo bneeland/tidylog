@@ -18,6 +18,10 @@ body {
   color: var(--tidy-black);
 }
 
+p {
+  line-height: 1.7;
+}
+
 .col-area {
   background: var(--tidy-grey2);
   color: var(--tidy-grey3);
@@ -42,14 +46,8 @@ body {
   background: white;
 }
 
-.col-acknowledge {
-  background: var(--tidy-grey1);
-  color: var(--tidy-grey3);
-}
-
-.col-acknowledge a, .col-acknowledge button {
-  color: var(--tidy-grey3);
-  text-align: left;
+.row-acknowledgement {
+  background: var(--tidy-grey2);
 }
 
 a, .btn-link {
