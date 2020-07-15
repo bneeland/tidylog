@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %}
+<td class="align-text-bottom">{% extends 'app/base.html' %}
 
 {% load static %}
 
@@ -286,12 +286,12 @@
               <tbody>
                 {% for acknowledgement in acknowledgements %}
                   <tr id="table_rows">
-                    <td>{{ acknowledgement.created_at }}</td>
-                    <td>{{ acknowledgement.name }}</td>
+                    <td class="align-text-bottom">{{ acknowledgement.created_at }}</td>
+                    <td class="align-text-bottom">{{ acknowledgement.name }}</td>
                   </tr>
                 {% empty %}
                   <tr id="table_rows">
-                    <td>No acknowledgements to display for the date selected</td>
+                    <td class="align-text-bottom">No acknowledgements to display for the date selected</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -322,13 +322,13 @@
             <tbody>
               {% for entry in entries %}
                 <tr id="table_rows">
-                    <td>{{ entry.created_at }}</td>
-                    <td>{{ entry.category }}</td>
+                    <td class="align-text-bottom">{{ entry.created_at }}</td>
+                    <td class="align-text-bottom">{{ entry.category }}</td>
                     {% for field in fields %}
-                      <td>{{ entry|get_object_attribute:field.type }}</td>
+                      <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
                     {% endfor %}
-                    <td>{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
-                    <td>
+                    <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
+                    <td class="align-text-bottom">
                       {% if entry.category.is_tracked %}
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
                       {% else %}
@@ -338,7 +338,7 @@
                 </tr>
               {% empty %}
                 <tr id="table_rows">
-                  <td>No entries to display for the date selected</td>
+                  <td class="align-text-bottom">No entries to display for the date selected</td>
                 </tr>
               {% endfor %}
             </tbody>
