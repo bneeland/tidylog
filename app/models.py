@@ -90,7 +90,7 @@ class Log(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    # tracked = models.BooleanField() ADD THIS IN SOON TO TRACK STATUS OF EVENTS
+    is_tracked = models.BooleanField()
 
     def __str__(self):
         return self.name
@@ -99,9 +99,15 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
 class Entry(models.Model):
+    STATUS_BANK = (
+        ('UR', 'Unresolved'),
+        ('IP', 'In progress'),
+        ('RE', 'Resolved'),
+    )
     log = models.ForeignKey(Log, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.CharField(max_length=2, choices=STATUS_BANK, default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     CF1 = models.CharField(max_length=50, blank=True, null=True)

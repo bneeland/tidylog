@@ -130,11 +130,11 @@
 
       {% if view.kwargs.acknowledgements %}
 
-        <div class="row row-acknowledgement pt-3">
+        <div class="row row-acknowledgements pt-3">
 
           <div class="col">
 
-            <div class="row">
+            <div class="row row-acknowledgement">
               <div class="col-4">
                 <span class="font-weight-bold">Unit lead</span> {% if unit_lead_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
               </div>
@@ -159,7 +159,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row row-acknowledgement">
               <div class="col-4">
                 <span class="font-weight-bold">Superintendent</span> {% if superintendent_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
               </div>
@@ -184,7 +184,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row row-acknowledgement">
               <div class="col-4">
                 <span class="font-weight-bold">Engineering</span> {% if engineering_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
               </div>
@@ -209,7 +209,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row row-acknowledgement">
               <div class="col-4">
                 <span class="font-weight-bold">New shift</span> {% if new_shift_acknowledgements %}<span class="text-success">Acknowledged</span>{% else %}<span class="text-secondary">Not acknowledged</span>{% endif %}
               </div>
@@ -305,7 +305,7 @@
 
       <div class="row pt-2">
 
-        <div class="col">
+        <div class="col px-2">
 
           <table class="table" id="myTable">
             <thead>
@@ -316,6 +316,7 @@
                   <th scope="col">{{ field.name }}</th>
                 {% endfor %}
                 <th scope="col">Employee</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -327,6 +328,13 @@
                       <td>{{ entry|get_object_attribute:field.type }}</td>
                     {% endfor %}
                     <td>{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
+                    <td>
+                      {% if entry.category.is_tracked %}
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
+                      {% else %}
+                        &mdash;
+                      {% endif %}
+                    </td>
                 </tr>
               {% empty %}
                 <tr id="table_rows">
@@ -339,6 +347,41 @@
         </div>
 
       </div>
+
+
+      <div class="modal" id="change_status" tabindex="-1" role="dialog" aria-labelledby="change_status_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="change_status_label">Change status</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form method="post">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Status</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Unresolved</option>
+                    <option>In progress</option>
+                    <option>Resolved</option>
+                  </select>
+                </div>
+                <input type="submit" value="Submit" disabled class="btn btn-primary btn-block">
+                <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
+              </form>
+
+            </div>
+            <!-- <div class="modal-footer">
+
+              <input type="submit" value="Submit" class="btn btn-primary btn-block">
+            </div> -->
+          </div>
+        </div>
+      </div>
+
 
       <div class="modal" id="add_entry" tabindex="-1" role="dialog" aria-labelledby="add_entry_label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

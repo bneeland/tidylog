@@ -15,6 +15,7 @@ class CreateEntryForm(forms.ModelForm):
 
         self.fields.pop('user')
         self.fields.pop('log')
+        self.fields.pop('status')
 
         # Get field codes that are applied to Log
         log_qs = models.Log.objects.filter(pk=self.log_pk)
