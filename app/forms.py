@@ -40,5 +40,6 @@ class CreateEntryForm(forms.ModelForm):
         entry = super(CreateEntryForm, self).save(commit=False)
         entry.user = self.user
         entry.log = models.Log.objects.filter(pk=self.log_pk)[0]
+        entry.status = 'UR'
         entry.save()
         return entry

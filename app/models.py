@@ -107,7 +107,7 @@ class Entry(models.Model):
     log = models.ForeignKey(Log, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
-    status = models.CharField(max_length=2, choices=STATUS_BANK, default=None, blank=True, null=True)
+    status = models.CharField(max_length=2, choices=STATUS_BANK, default='None', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     CF1 = models.CharField(max_length=50, blank=True, null=True)
