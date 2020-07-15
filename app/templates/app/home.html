@@ -8,23 +8,13 @@
 <div class="container-fluid h-100">
   <div class="row h-100">
 
-    <div class="col-2 col-area p-1 h-100">
+    <div class="col-1 col-area p-2 fixed-top overflow-auto h-100">
       <!-- <p class="text-center"><small>AREAS</small></p> -->
       {% for area in areas %}
         <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+      {% empty %}
+        No areas to display
       {% endfor %}
-      <hr>
-      <div class="btn-group dropright btn-block">
-        <button type="button" class="btn btn-link dropdown-toggle sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </button>
-        <div class="dropdown-menu">
-          <span class="dropdown-item-text">{{ user.email }}</span>
-          <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
-          <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
-        </div>
-      </div>
-      <a href="#" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
     </div>
 
   </div>
