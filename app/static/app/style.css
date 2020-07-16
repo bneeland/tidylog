@@ -32,6 +32,7 @@ body {
 .col-log {
   background: var(--tidy-lightest);
   color: var(--tidy-dark);
+  z-index: 100;
 }
 
 .col-log a, .col-log button {
@@ -96,6 +97,10 @@ a:hover, .btn-link:hover {
   color: var(--tidy-darkest);
 }
 
+.col-area .border-top {
+  border-color: var(--tidy-medium) !important;
+}
+
 .col-log .sidebarnav.active {
   background: var(--tidy-medium);
   color: var(--tidy-darkest);
@@ -103,6 +108,7 @@ a:hover, .btn-link:hover {
 
 .sidebarnav.active:hover {
   background: var(--tidy-blue-light);
+  color: white;
 }
 
 .table {
