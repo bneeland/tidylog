@@ -19,7 +19,11 @@
         <div class="col-2 col-area p-2 fixed-top overflow-auto h-100">
           <!-- <p class="text-center"><small>AREAS</small></p> -->
           {% for area in areas %}
-            <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+            {% if view.kwargs.area_pk == area.pk %}
+              <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block active sidebarnav" role="button">{{ area }}</a>
+            {% else %}
+              <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+            {% endif %}
           {% empty %}
             No areas to display
           {% endfor %}
@@ -29,7 +33,11 @@
 
           <!-- <p class="text-center"><small>LOGS</small></p> -->
           {% for log in logs %}
-            <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+            {% if view.kwargs.log_pk == log.pk %}
+              <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block active sidebarnav" role="button">{{ log }}</a>
+            {% else %}
+              <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+            {% endif %}
           {% empty %}
             No logs to display
           {% endfor %}
