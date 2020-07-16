@@ -48,17 +48,9 @@
 
           <!-- <p class="text-center"><small>LOGS</small></p> -->
           {% for log in logs %}
-            {% now "Y" as current_year %}
-            {% now "m" as current_month %}
-            {% now "d" as current_day %}
-
-            {% if view.kwargs.log_pk == log.pk %}
-              <a href="{% url 'app:log_daily' area.pk log.pk current_year current_month current_day %}" class="btn btn-link btn-block active sidebarnav" role="button">{{ log }}</a>
-            {% else %}
-              <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
-            {% endif %}
+            <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
           {% empty %}
-            <div class="text-center">No logs to display</div>
+            No logs to display
           {% endfor %}
 
         </div>
