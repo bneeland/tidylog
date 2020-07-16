@@ -16,7 +16,7 @@
 
       <!-- <div class="row h-100"> -->
 
-        <div class="col-1 col-area p-2 fixed-top overflow-auto h-100">
+        <div class="col-2 col-area p-2 fixed-top overflow-auto h-100">
           <!-- <p class="text-center"><small>AREAS</small></p> -->
           {% for area in areas %}
             <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
@@ -25,7 +25,7 @@
           {% endfor %}
         </div>
 
-        <div class="col-2 col-log p-2 offset-1 fixed-top overflow-auto h-100">
+        <div class="col-2 col-log p-2 offset-2 fixed-top overflow-auto h-100">
 
           <!-- <p class="text-center"><small>LOGS</small></p> -->
           {% for log in logs %}
@@ -54,7 +54,7 @@
 
     <!-- </div> -->
 
-    <div class="col-9 col-entry offset-3 fixed-top">
+    <div class="col-8 col-entry offset-4 fixed-top">
 
       <div class="row p-2 shadow-sm">
 
@@ -126,7 +126,7 @@
 
     </div>
 
-    <div class="col-9 col-entry pt-5 ml-auto">
+    <div class="col-8 col-entry pt-5 ml-auto">
 
       {% if view.kwargs.acknowledgements %}
 
