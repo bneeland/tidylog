@@ -105,8 +105,9 @@
             {% endif %}
           </div>
 
-
-        <!-- <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Search"> -->
+          <div class="pl-2">
+            <input class="form-control" id="search_input" type="text" placeholder="Search">
+          </div>
 
 
           <div class="ml-auto">
@@ -281,46 +282,13 @@
           </div>
         </div>
 
-
-        {% comment %}<div class="row pt-3">
-
-          <div class="col">
-
-            <table class="table" id="myTable">
-              <thead>
-                <tr>
-                  <th scope="col">Date/time</th>
-                  <th scope="col">Unit lead</th>
-                  <th scope="col">Supervisor</th>
-                  <th scope="col">Engineering</th>
-                  <th scope="col">New shift</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for acknowledgement in acknowledgements %}
-                  <tr id="table_rows">
-                    <td class="align-text-bottom">{{ acknowledgement.created_at }}</td>
-                    <td class="align-text-bottom">{{ acknowledgement.name }}</td>
-                  </tr>
-                {% empty %}
-                  <tr id="table_rows">
-                    <td class="align-text-bottom">No acknowledgements to display for the date selected</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-
-          </div>
-
-        </div>{% endcomment %}
-
       {% endif %}
 
       <div class="row pt-2">
 
         <div class="col px-2">
 
-          <table class="table" id="myTable">
+          <table class="table">
             <thead>
               <tr>
                 <th scope="col">Date/time</th>
@@ -332,7 +300,7 @@
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="search_table">
               {% for entry in entries %}
                 <tr id="table_rows">
                     <td class="align-text-bottom">{{ entry.created_at }}</td>
@@ -360,6 +328,10 @@
         </div>
 
       </div>
+
+
+
+
 
 
       <div class="modal" id="change_status" tabindex="-1" role="dialog" aria-labelledby="change_status_label" aria-hidden="true">
