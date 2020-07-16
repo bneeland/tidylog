@@ -50,7 +50,7 @@
           <a href="{% url 'app:log' log.area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
         {% endif %}
       {% empty %}
-        No logs to display
+        <div class="text-center">No logs to display</div>
       {% endfor %}
 
     </div>

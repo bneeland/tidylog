@@ -14,7 +14,7 @@
       <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
     {% endif %}
   {% empty %}
-    No areas to display
+    <div class="text-center">No areas to display</div>
   {% endfor %}
 
   <div class="border-top mt-4 pt-4">
