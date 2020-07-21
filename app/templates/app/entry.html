@@ -13,9 +13,7 @@
 
   <div class="border rounded p-5 bg-white">
 
-    <div class="col">
-
-      <table class="table">
+      <table class="table m-0">
         <thead>
         </thead>
         <tbody>
@@ -50,6 +48,41 @@
         </tbody>
       </table>
 
+    </div>
+
+
+    <div class="modal" id="change_status" tabindex="-1" role="dialog" aria-labelledby="change_status_label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="change_status_label">Change status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form method="post">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Status</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Unresolved</option>
+                  <option>In progress</option>
+                  <option>Resolved</option>
+                </select>
+              </div>
+              <input type="submit" value="Submit" disabled class="btn btn-primary btn-block">
+              <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
+            </form>
+
+          </div>
+          <!-- <div class="modal-footer">
+
+            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+          </div> -->
+        </div>
+      </div>
+    </div>
 
 
 </div>
