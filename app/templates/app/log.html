@@ -93,11 +93,11 @@
         <div class="pl-2">
           {% if url_name == 'log_daily' %}
             {% if view.kwargs.acknowledgements %}
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=True %}"><i class="fas fa-angle-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=True %}"><i class="fas fa-angle-right"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=True %}"><i class="fas fa-caret-left"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=True %}"><i class="fas fa-caret-right"></i></a>
             {% else %}
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=False %}"><i class="fas fa-angle-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=False %}"><i class="fas fa-angle-right"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=False %}"><i class="fas fa-caret-left"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=False %}"><i class="fas fa-caret-right"></i></a>
             {% endif %}
             <span class="btn btn-text">{{ view.kwargs.year }}-{{ view.kwargs.month|stringformat:"02d" }}-{{ view.kwargs.day|stringformat:"02d" }}</span>
           {% endif %}
@@ -109,21 +109,21 @@
 
             {% comment %}{% if url_name == "log" %}
               {% if view.kwargs.acknowledgements %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=False %}">Acknowledgements <i class="fas fa-caret-up"></i></a>
               {% else %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log' area_pk=area.pk log_pk=log.pk acknowledgements=True %}">Acknowledgements <i class="fas fa-caret-down"></i></a>
               {% endif %}{% endcomment %}
             {% if url_name == "log_daily" %}
               {% if view.kwargs.acknowledgements %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=False %}">Acknowledgements <i class="fas fa-caret-up"></i></a>
               {% else %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=True %}">Acknowledgements <i class="fas fa-caret-down"></i></a>
               {% endif %}
             {% elif url_name == "log_date_range" %}
               {% if view.kwargs.acknowledgements %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=False %}">Acknowledgements <i class="fas fa-angle-up"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=False %}">Acknowledgements <i class="fas fa-caret-up"></i></a>
               {% else %}
-                <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=True %}">Acknowledgements <i class="fas fa-angle-down"></i></a>
+                <a type="button" class="btn btn-secondary" href="{% url 'app:log_date_range' area_pk=area.pk log_pk=log.pk year_start=view.kwargs.year_start month_start=view.kwargs.month_start day_start=view.kwargs.day_start year_end=view.kwargs.year_end month_end=view.kwargs.month_end day_end=view.kwargs.day_end acknowledgements=True %}">Acknowledgements <i class="fas fa-caret-down"></i></a>
               {% endif %}
             {% endif %}
 
@@ -294,6 +294,7 @@
                 {% endfor %}
                 <th scope="col">Employee</th>
                 <th scope="col">Status</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody id="search_table">
@@ -314,6 +315,7 @@
                         &mdash;
                       {% endif %}
                     </td>
+                    <td class="align-text-bottom"><a href="{% url 'app:entry' entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
                 </tr>
               {% empty %}
                 <tr id="table_rows">

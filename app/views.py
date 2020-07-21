@@ -158,3 +158,14 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
                 'month_end': self.kwargs['month_end'],
                 'day_end': self.kwargs['day_end'],
             })
+
+class Entry(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    login_url = "login"
+    permission_required = 'app.view_entry'
+    template_name = "app/entry.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        entry_pk = self.kwargs['entry_pk']
+        context['entry'] = models.Entry.objects.get(pk=entry_pk)
+        return context

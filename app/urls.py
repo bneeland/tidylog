@@ -13,4 +13,5 @@ urlpatterns = [
     path('area-<int:area_pk>/log-<int:log_pk>/daily/<int:year>-<int:month>-<int:day>', views.Log.as_view(), name='log_daily', kwargs={'acknowledgements': False}),
     path('area-<int:area_pk>/log-<int:log_pk>/date-range/<int:year_start>-<int:month_start>-<int:day_start>/<int:year_end>-<int:month_end>-<int:day_end>/acknowledgements', views.Log.as_view(), name='log_date_range', kwargs={'acknowledgements': True}),
     path('area-<int:area_pk>/log-<int:log_pk>/date-range/<int:year_start>-<int:month_start>-<int:day_start>/<int:year_end>-<int:month_end>-<int:day_end>', views.Log.as_view(), name='log_date_range', kwargs={'acknowledgements': False}),
+    path('entry-<int:entry_pk>', views.Entry.as_view(), name='entry'),
 ]
