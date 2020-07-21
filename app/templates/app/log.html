@@ -288,7 +288,9 @@
                 <th scope="col">Date/time</th>
                 <th scope="col">Category</th>
                 {% for field in fields %}
-                  <th scope="col">{{ field.name }}</th>
+                  {% if field.shown_in_table %}
+                    <th scope="col">{{ field.name }}</th>
+                  {% endif %}
                 {% endfor %}
                 <th scope="col">Employee</th>
                 <th scope="col">Status</th>
@@ -300,7 +302,9 @@
                     <td class="align-text-bottom">{{ entry.created_at }}</td>
                     <td class="align-text-bottom">{{ entry.category }}</td>
                     {% for field in fields %}
-                      <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
+                      {% if field.shown_in_table %}
+                        <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
+                      {% endif %}
                     {% endfor %}
                     <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
                     <td class="align-text-bottom">

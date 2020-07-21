@@ -38,6 +38,7 @@ class Field(models.Model):
         ('FF5', 'Floating point number field 5'),
     )
     type = models.CharField(max_length=5, choices=FIELD_BANK, default=None, blank=True, null=True)
+    shown_in_table = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
