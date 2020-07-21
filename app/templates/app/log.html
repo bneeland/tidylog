@@ -315,7 +315,7 @@
                         &mdash;
                       {% endif %}
                     </td>
-                    <td class="align-text-bottom"><a href="{% url 'app:entry' entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
+                    <td class="align-text-bottom"><a href="{% url 'app:entry' area.pk log.pk entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
                 </tr>
               {% empty %}
                 <tr id="table_rows">

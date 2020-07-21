@@ -9,12 +9,48 @@
 {% block title %}Logs{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="h-100 d-flex justify-content-center align-items-center bg-light">
 
-  <div class="jumbotron">
-    Entry details
-    {{ entry.created_at }}
-  </div>
+  <div class="border rounded p-5 bg-white">
+
+    <div class="col">
+
+      <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+              <td class="align-text-bottom"><b>Date/time</b></td>
+              <td class="align-text-bottom">{{ entry.created_at }}</td>
+            </tr>
+            <tr>
+              <td class="align-text-bottom"><b>Category</b></td>
+              <td class="align-text-bottom">{{ entry.category }}</td>
+            </tr>
+            {% for field in fields %}
+              <tr>
+                <td class="align-text-bottom"><b>{{ field.name }}</b></td>
+                <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
+              </tr>
+            {% endfor %}
+            <tr>
+              <td class="align-text-bottom"><b>Employee</b></td>
+              <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
+            </tr>
+            <tr>
+              <td class="align-text-bottom"><b>Status</b></td>
+              <td class="align-text-bottom">
+                {% if entry.category.is_tracked %}
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
+                {% else %}
+                  &mdash;
+                {% endif %}
+              </td>
+            </tr>
+        </tbody>
+      </table>
+
+
 
 </div>
 {% endblock %}

@@ -17,6 +17,7 @@ html, body {
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--tidy-black);
+  overflow-y: scroll;
 }
 
 .col-area {

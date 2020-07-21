@@ -118,8 +118,6 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
         context['superintendent_acknowledgements'] = acknowledgements.filter(group__name="Superintendent")
         context['engineering_acknowledgements'] = acknowledgements.filter(group__name="Engineering")
         context['new_shift_acknowledgements'] = acknowledgements.filter(group__name="Operator")
-
-
         return context
 
     def get_form_kwargs(self):
@@ -166,6 +164,17 @@ class Entry(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # Get entry from URL
         entry_pk = self.kwargs['entry_pk']
         context['entry'] = models.Entry.objects.get(pk=entry_pk)
+
+        # Get log from URL
+        log_pk = self.kwargs['log_pk']
+        log = models.Log.objects.get(pk=log_pk)
+        context['log'] = log
+
+        # Get headings for current log
+        context['fields'] = log.fields.all()
+
         return context
