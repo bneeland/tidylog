@@ -9,44 +9,124 @@
 {% block title %}Logs{% endblock %}
 
 {% block content %}
-<div class="h-100 d-flex justify-content-center align-items-center bg-light">
+<div class="container-fluid">
+  <div class="row">
 
-  <div class="border rounded p-5 bg-white">
+    <div class="col-2 col-area p-2 fixed-top overflow-auto h-100">
+      <!-- <p class="text-center"><small>AREAS</small></p> -->
+      {% for area in areas %}
+        {% if view.kwargs.area_pk == area.pk %}
+          <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block active sidebarnav" role="button">{{ area }}</a>
+        {% else %}
+          <a href="{% url 'app:area' area.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ area }}</a>
+        {% endif %}
+      {% empty %}
+        <div class="text-center">No areas to display</div>
+      {% endfor %}
 
-      <table class="table m-0">
-        <thead>
-        </thead>
-        <tbody>
-            <tr>
-              <td class="align-text-bottom"><b>Date/time</b></td>
-              <td class="align-text-bottom">{{ entry.created_at }}</td>
-            </tr>
-            <tr>
-              <td class="align-text-bottom"><b>Category</b></td>
-              <td class="align-text-bottom">{{ entry.category }}</td>
-            </tr>
-            {% for field in fields %}
-              <tr>
-                <td class="align-text-bottom"><b>{{ field.name }}</b></td>
-                <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
-              </tr>
-            {% endfor %}
-            <tr>
-              <td class="align-text-bottom"><b>Employee</b></td>
-              <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
-            </tr>
-            <tr>
-              <td class="align-text-bottom"><b>Status</b></td>
-              <td class="align-text-bottom">
-                {% if entry.category.is_tracked %}
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
-                {% else %}
-                  &mdash;
-                {% endif %}
-              </td>
-            </tr>
-        </tbody>
-      </table>
+      <div class="border-top mt-4 pt-4">
+        <div class="btn-group dropdown btn-block">
+          <button type="button" class="btn btn-link dropdown-toggle mt-2 sidebarnav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </button>
+          <div class="dropdown-menu">
+            {% comment %}<span class="dropdown-item-text">{{ user.email }}</span>{% endcomment %}
+            <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+          </div>
+        </div>
+        <a href="#" class="btn btn-link btn-block sidebarnav" role="button">Settings</a>
+      </div>
+
+    </div>
+
+    <div class="col-2 col-log p-2 offset-2 fixed-top overflow-auto h-100">
+
+      <!-- <p class="text-center"><small>LOGS</small></p> -->
+      {% for log in logs %}
+        {% now "Y" as current_year %}
+        {% now "m" as current_month %}
+        {% now "d" as current_day %}
+
+        {% if view.kwargs.log_pk == log.pk %}
+          <a href="{% url 'app:log' area.pk log.pk %}" class="btn btn-link btn-block active sidebarnav" role="button">{{ log }}</a>
+        {% else %}
+          <a href="{% url 'app:log' area.pk log.pk %}" class="btn btn-link btn-block sidebarnav" role="button">{{ log }}</a>
+        {% endif %}
+      {% empty %}
+        <div class="text-center">No logs to display</div>
+      {% endfor %}
+
+    </div>
+
+
+
+    <div class="col-8 col-entry offset-4 fixed-top">
+
+      <div class="row p-2 border-bottom">
+
+        <div>
+          {% with request.resolver_match.url_name as url_name %}
+
+            {% if url_name == 'entry_daily' %}
+              <a class="btn btn-primary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button"><i class="fas fa-caret-left"></i> Back</a>
+            {% else %}
+              <a class="btn btn-primary" href="{% url 'app:log' area.pk log.pk %}" role="button"><i class="fas fa-caret-left"></i> Back</a>
+            {% endif %}
+
+          {% endwith %}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-8 col-entry pt-5 ml-auto">
+
+      <div class="row pt-2">
+
+        <div class="col px-2">
+
+
+          <table class="table mt-3">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                  <td class="align-text-bottom"><b>Date/time</b></td>
+                  <td class="align-text-bottom">{{ entry.created_at }}</td>
+                </tr>
+                <tr>
+                  <td class="align-text-bottom"><b>Category</b></td>
+                  <td class="align-text-bottom">{{ entry.category }}</td>
+                </tr>
+                {% for field in fields %}
+                  <tr>
+                    <td class="align-text-bottom"><b>{{ field.name }}</b></td>
+                    <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <td class="align-text-bottom"><b>Employee</b></td>
+                  <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
+                </tr>
+                <tr>
+                  <td class="align-text-bottom"><b>Status</b></td>
+                  <td class="align-text-bottom">
+                    {% if entry.category.is_tracked %}
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
+                    {% else %}
+                      &mdash;
+                    {% endif %}
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
 
     </div>
 

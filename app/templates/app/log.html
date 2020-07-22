@@ -315,7 +315,11 @@
                         &mdash;
                       {% endif %}
                     </td>
-                    <td class="align-text-bottom"><a href="{% url 'app:entry' area.pk log.pk entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
+                    {% if url_name == 'log_daily' %}
+                      <td class="align-text-bottom"><a href="{% url 'app:entry_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
+                    {% else %}
+                      <td class="align-text-bottom"><a href="{% url 'app:entry' area.pk log.pk entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
+                    {% endif %}
                 </tr>
               {% empty %}
                 <tr id="table_rows">
