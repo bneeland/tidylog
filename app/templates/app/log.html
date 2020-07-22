@@ -72,11 +72,11 @@
       <div class="row p-2 border-bottom">
 
         <div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_entry">Add entry</button>
+          <button type="button" class="btn btn-primary h-100" data-toggle="modal" data-target="#add_entry">Add entry</button>
         </div>
 
         <div class="pl-2">
-          <input class="form-control" id="search_input" type="text" placeholder="Search">
+          <input class="form-control h-100" id="search_input" type="text" placeholder="Search">
         </div>
 
         <div class="pl-2">
@@ -93,11 +93,11 @@
         <div class="pl-2">
           {% if url_name == 'log_daily' %}
             {% if view.kwargs.acknowledgements %}
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=True %}"><i class="fas fa-caret-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=True %}"><i class="fas fa-caret-right"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=True %}">&ZeroWidthSpace;<i class="fas fa-angle-left"></i>&ZeroWidthSpace;</a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=True %}">&ZeroWidthSpace;<i class="fas fa-angle-right"></i>&ZeroWidthSpace;</a>
             {% else %}
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=False %}"><i class="fas fa-caret-left"></i></a>
-              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=False %}"><i class="fas fa-caret-right"></i></a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_remove|date:'Y' month=date_remove|date:'m' day=date_remove|date:'d' acknowledgements=False %}">&ZeroWidthSpace;<i class="fas fa-angle-left"></i>&ZeroWidthSpace;</a>
+              <a type="button" class="btn btn-secondary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=date_add|date:'Y' month=date_add|date:'m' day=date_add|date:'d' acknowledgements=False %}">&ZeroWidthSpace;<i class="fas fa-angle-right"></i>&ZeroWidthSpace;</a>
             {% endif %}
             <span class="btn btn-text">{{ view.kwargs.year }}-{{ view.kwargs.month|stringformat:"02d" }}-{{ view.kwargs.day|stringformat:"02d" }}</span>
           {% endif %}

@@ -69,9 +69,9 @@
           {% with request.resolver_match.url_name as url_name %}
 
             {% if url_name == 'entry_daily' %}
-              <a class="btn btn-primary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button"><i class="fas fa-caret-left"></i> Back</a>
+              <a class="btn btn-primary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button"><i class="fas fa-angle-left"></i> Back</a>
             {% else %}
-              <a class="btn btn-primary" href="{% url 'app:log' area.pk log.pk %}" role="button"><i class="fas fa-caret-left"></i> Back</a>
+              <a class="btn btn-primary" href="{% url 'app:log' area.pk log.pk %}" role="button"><i class="fas fa-angle-left"></i> Back</a>
             {% endif %}
 
           {% endwith %}
