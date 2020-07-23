@@ -311,9 +311,9 @@
                     <td class="align-text-bottom">
                       {% if entry.category.is_tracked %}
                         {% if url_name == 'log_daily' %}
-                          <a class="btn btn-sm btn-primary" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
+                          <a class="btn btn-primary btn-sm" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
                         {% else %}
-                          <a class="btn btn-sm btn-primary" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
+                          <a class="btn btn-primary btn-sm" href="{% url 'app:status' area_pk=area.pk log_pk=log.pk entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
                         {% endif %}
                       {% else %}
                         &mdash;
