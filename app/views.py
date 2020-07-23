@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy, resolve
+from django.shortcuts import get_object_or_404
 from django.views.generic.base import ContextMixin
 from django.utils import timezone
 from django.conf import settings
@@ -183,3 +184,64 @@ class Entry(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, 
         context['entry'] = models.Entry.objects.get(pk=entry_pk)
 
         return context
+
+class Status(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, UpdateView):
+    login_url = "login"
+    permission_required = 'app.change_entry'
+    model = models.Entry
+    fields = ['status']
+    template_name = "app/status.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get area from URL
+        area_pk = self.kwargs['area_pk']
+        area = models.Area.objects.get(pk=area_pk)
+        context['area'] = area
+
+        # Get log from URL
+        log_pk = self.kwargs['log_pk']
+        log = models.Log.objects.get(pk=log_pk)
+        context['log'] = log
+
+        # Get headings for current log
+        context['fields'] = log.fields.all()
+
+        # Get entry from URL
+        entry_pk = self.kwargs['entry_pk']
+        context['entry'] = models.Entry.objects.get(pk=entry_pk)
+
+        return context
+
+    def get_object(self):
+        entry_pk = self.kwargs['entry_pk']
+        return get_object_or_404(models.Entry, pk=entry_pk)
+
+    def get_success_url(self):
+        url_name = resolve(self.request.path_info).url_name
+
+        if url_name == 'status':
+            return reverse_lazy('app:log', kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+            })
+        elif url_name == 'status_daily':
+            return reverse_lazy('app:log_daily', kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+                'year': self.kwargs['year'],
+                'month': self.kwargs['month'],
+                'day': self.kwargs['day'],
+            })
+        elif url_name == 'log_date_range':
+            return reverse_lazy(url_name_complete, kwargs={
+                'area_pk': self.kwargs['area_pk'],
+                'log_pk': self.kwargs['log_pk'],
+                'year_start': self.kwargs['year_start'],
+                'month_start': self.kwargs['month_start'],
+                'day_start': self.kwargs['day_start'],
+                'year_end': self.kwargs['year_end'],
+                'month_end': self.kwargs['month_end'],
+                'day_end': self.kwargs['day_end'],
+            })

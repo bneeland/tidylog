@@ -310,16 +310,22 @@
                     <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
                     <td class="align-text-bottom">
                       {% if entry.category.is_tracked %}
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
+                        {% if url_name == 'log_daily' %}
+                          <a class="btn btn-sm btn-primary" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
+                        {% else %}
+                          <a class="btn btn-sm btn-primary" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
+                        {% endif %}
                       {% else %}
                         &mdash;
                       {% endif %}
                     </td>
-                    {% if url_name == 'log_daily' %}
-                      <td class="align-text-bottom"><a href="{% url 'app:entry_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
-                    {% else %}
-                      <td class="align-text-bottom"><a href="{% url 'app:entry' area.pk log.pk entry.pk %}"><i class="fas fa-ellipsis-h"></i></a></td>
-                    {% endif %}
+                    <td class="align-text-bottom">
+                      {% if url_name == 'log_daily' %}
+                        <a href="{% url 'app:entry_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}"><i class="fas fa-ellipsis-h"></i></a>
+                      {% else %}
+                        <a href="{% url 'app:entry' area.pk log.pk entry.pk %}"><i class="fas fa-ellipsis-h"></i></a>
+                      {% endif %}
+                    </td>
                 </tr>
               {% empty %}
                 <tr id="table_rows">
@@ -331,44 +337,6 @@
 
         </div>
 
-      </div>
-
-
-
-
-
-
-      <div class="modal" id="change_status" tabindex="-1" role="dialog" aria-labelledby="change_status_label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="change_status_label">Change status</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-
-              <form method="post">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Status</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Unresolved</option>
-                    <option>In progress</option>
-                    <option>Resolved</option>
-                  </select>
-                </div>
-                <input type="submit" value="Submit" disabled class="btn btn-primary btn-block">
-                <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
-              </form>
-
-            </div>
-            <!-- <div class="modal-footer">
-
-              <input type="submit" value="Submit" class="btn btn-primary btn-block">
-            </div> -->
-          </div>
-        </div>
       </div>
 
 
