@@ -71,11 +71,17 @@
 
       <div class="row p-2 border-bottom">
 
-        <div>
-          <button type="button" class="btn btn-primary h-100" data-toggle="modal" data-target="#add_entry">Add entry</button>
-        </div>
+        {% if user|has_group:"Operator" %}
+          <div>
+            <button type="button" class="btn btn-primary h-100" data-toggle="modal" data-target="#add_entry">Add entry</button>
+          </div>
+        {% endif %}
 
-        <div class="pl-2">
+        {% if user|has_group:"Operator" %}
+          <div class="pl-2">
+        {% else %}
+          <div>
+        {% endif %}
           <input class="form-control h-100" id="search_input" type="text" placeholder="Search">
         </div>
 
@@ -158,7 +164,7 @@
                 {% else %}
                   <p>
                     {% if user|has_group:"Unit lead" %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                      <a class="btn btn-primary btn-sm" href="{% url 'app:acknowledge_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button">Acknowledge</a>
                     {% else %}
                       &mdash;
                     {% endif %}
@@ -183,7 +189,7 @@
                 {% else %}
                   <p>
                     {% if user|has_group:"Superintendent" %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                      <a class="btn btn-primary btn-sm" href="{% url 'app:acknowledge_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button">Acknowledge</a>
                     {% else %}
                       &mdash;
                     {% endif %}
@@ -208,7 +214,7 @@
                 {% else %}
                   <p>
                     {% if user|has_group:"Engineering" %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                      <a class="btn btn-primary btn-sm" href="{% url 'app:acknowledge_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button">Acknowledge</a>
                     {% else %}
                       &mdash;
                     {% endif %}
@@ -233,7 +239,7 @@
                 {% else %}
                   <p>
                     {% if user|has_group:"Operator" %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_acknowledgement">Acknowledge</button>
+                      <a class="btn btn-primary btn-sm" href="{% url 'app:acknowledge_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button">Acknowledge</a>
                     {% else %}
                       &mdash;
                     {% endif %}
@@ -244,36 +250,6 @@
 
           </div>
 
-        </div>
-
-
-        <div class="modal" id="add_acknowledgement" tabindex="-1" role="dialog" aria-labelledby="add_acknowledgement_label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="add_acknowledgement_label">Acknowledgement</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form method="post">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Acknowledgement comments</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <input type="submit" value="Submit" disabled class="btn btn-primary btn-block">
-                  <button type="button" class="btn btn-link btn-block mt-3" data-dismiss="modal">Cancel</button>
-                </form>
-
-              </div>
-              <!-- <div class="modal-footer">
-
-                <input type="submit" value="Submit" class="btn btn-primary btn-block">
-              </div> -->
-            </div>
-          </div>
         </div>
 
       {% endif %}

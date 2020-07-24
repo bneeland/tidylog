@@ -66,15 +66,9 @@
       <div class="row p-2 border-bottom">
 
         <div>
-          {% with request.resolver_match.url_name as url_name %}
 
-            {% if url_name == 'entry_daily' %}
-              <a class="btn btn-primary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day %}" role="button"><i class="fas fa-angle-left"></i> Back</a>
-            {% else %}
-              <a class="btn btn-primary" href="{% url 'app:log' area.pk log.pk %}" role="button"><i class="fas fa-angle-left"></i> Back</a>
-            {% endif %}
+          <a class="btn btn-primary" href="{% url 'app:log_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day acknowledgements=True %}" role="button"><i class="fas fa-angle-left"></i> Back</a>
 
-          {% endwith %}
         </div>
 
       </div>
@@ -88,41 +82,11 @@
 
         <div class="col px-2">
 
-
-          <table class="table mt-3">
-            <thead>
-            </thead>
-            <tbody>
-                <tr>
-                  <td class="align-text-bottom"><b>Date/time</b></td>
-                  <td class="align-text-bottom">{{ entry.created_at }}</td>
-                </tr>
-                <tr>
-                  <td class="align-text-bottom"><b>Category</b></td>
-                  <td class="align-text-bottom">{{ entry.category }}</td>
-                </tr>
-                {% for field in fields %}
-                  <tr>
-                    <td class="align-text-bottom"><b>{{ field.name }}</b></td>
-                    <td class="align-text-bottom">{{ entry|get_object_attribute:field.type }}</td>
-                  </tr>
-                {% endfor %}
-                <tr>
-                  <td class="align-text-bottom"><b>Employee</b></td>
-                  <td class="align-text-bottom">{{ entry.user.first_name }} {{ entry.user.last_name }}</td>
-                </tr>
-                <tr>
-                  <td class="align-text-bottom"><b>Status</b></td>
-                  <td class="align-text-bottom">
-                    {% if entry.category.is_tracked %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
-                    {% else %}
-                      &mdash;
-                    {% endif %}
-                  </td>
-                </tr>
-            </tbody>
-          </table>
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+          </form>
 
         </div>
 

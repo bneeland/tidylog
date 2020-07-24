@@ -41,7 +41,7 @@ class Area(LoginRequiredMixin, AreasMixin, LogsMixin, TemplateView):
 
 class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, CreateView):
     login_url = "login"
-    permission_required = 'app.add_entry'
+    permission_required = 'app.view_entry'
     model = models.Entry
     template_name = "app/log.html"
     form_class = forms.CreateEntryForm
@@ -245,3 +245,47 @@ class Status(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin,
                 'month_end': self.kwargs['month_end'],
                 'day_end': self.kwargs['day_end'],
             })
+
+class Acknowledge(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, CreateView):
+    login_url = "login"
+    permission_required = 'app.add_acknowledgement'
+    model = models.Acknowledgement
+    template_name = "app/acknowledge.html"
+    form_class = forms.CreateAcknowledgementForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get area from URL
+        area_pk = self.kwargs['area_pk']
+        area = models.Area.objects.get(pk=area_pk)
+        context['area'] = area
+
+        # Get log from URL
+        log_pk = self.kwargs['log_pk']
+        log = models.Log.objects.get(pk=log_pk)
+        context['log'] = log
+
+        # Get headings for current log
+        context['fields'] = log.fields.all()
+
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user,
+            'log_pk': self.kwargs['log_pk'],
+            'group': self.request.user.groups.all(),
+        })
+        return kwargs
+
+    def get_success_url(self):
+        return reverse_lazy('app:log_daily', kwargs={
+            'area_pk': self.kwargs['area_pk'],
+            'log_pk': self.kwargs['log_pk'],
+            'year': self.kwargs['year'],
+            'month': self.kwargs['month'],
+            'day': self.kwargs['day'],
+            'acknowledgements': True,
+        })
