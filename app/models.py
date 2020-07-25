@@ -183,4 +183,4 @@ class Acknowledgement(models.Model):
     FF5 = models.FloatField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.created_at)
+        return str(self.for_date)
