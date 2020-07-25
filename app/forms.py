@@ -89,9 +89,8 @@ class CreateAcknowledgementForm(forms.ModelForm):
         for field_code_to_pop in field_codes_to_pop:
             self.fields.pop(field_code_to_pop)
 
-        # Set field labels
-        for code in acknowledgement_field_codes:
-            self.fields[code].label = models.AcknowledgementField.objects.filter(type=code)[0].name
+        for code, acknowledgement_field in zip(acknowledgement_field_codes, acknowledgement_fields_qs):
+            self.fields[code].label = acknowledgement_field.name
 
     def save(self):
         entry = super(CreateAcknowledgementForm, self).save(commit=False)
