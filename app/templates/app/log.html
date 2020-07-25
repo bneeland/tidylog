@@ -276,7 +276,11 @@
             <tbody id="search_table">
               {% for entry in entries %}
                 <tr id="table_rows">
-                    <td class="align-text-bottom">{{ entry.created_at }}</td>
+                    {% if url_name == 'log' %}
+                      <td class="align-text-bottom"><a class="text" href="{% url 'app:log_daily' area.pk log.pk entry.created_at|date:'Y' entry.created_at|date:'m' entry.created_at|date:'d' %}">{{ entry.created_at|date }}</a>, {{ entry.created_at|time }}</td>
+                    {% else %}
+                      <td class="align-text-bottom">{{ entry.created_at }}</td>
+                    {% endif %}
                     <td class="align-text-bottom">{{ entry.category }}</td>
                     {% for field in fields %}
                       {% if field.shown_in_table %}
@@ -289,7 +293,7 @@
                         {% if url_name == 'log_daily' %}
                           <a class="btn btn-primary btn-sm" href="{% url 'app:status_daily' area_pk=area.pk log_pk=log.pk year=view.kwargs.year month=view.kwargs.month day=view.kwargs.day entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
                         {% else %}
-                          <a class="btn btn-primary btn-sm" href="{% url 'app:status' area_pk=area.pk log_pk=log.pk entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }} <i class="far fa-edit"></i></a>
+                          <a class="btn btn-primary btn-sm" href="{% url 'app:status' area_pk=area.pk log_pk=log.pk entry_pk=entry.pk %}" role="button">{{ entry.get_status_display }}</a>
                         {% endif %}
                       {% else %}
                         &mdash;

@@ -119,3 +119,7 @@ a:hover, .btn-link:hover {
 .table th {
   border-top: 0;
 }
+
+.table a.text {
+  color: var(--tidy-dark);
+}
