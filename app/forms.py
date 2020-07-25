@@ -34,8 +34,8 @@ class CreateEntryForm(forms.ModelForm):
             self.fields.pop(field_code_to_pop)
 
         # Set field labels
-        for code in log_field_codes:
-            self.fields[code].label = models.Field.objects.filter(log=self.log_pk, type=code)[0].name
+        for code, log_field in zip(log_field_codes, log_fields_qs):
+            self.fields[code].label = log_field.name
 
     def save(self):
         entry = super(CreateEntryForm, self).save(commit=False)
