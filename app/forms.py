@@ -1,4 +1,5 @@
 from django import forms
+import datetime
 
 from . import models
 
@@ -53,12 +54,16 @@ class CreateAcknowledgementForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         self.log_pk = kwargs.pop('log_pk', None)
         self.group = kwargs.pop('group', None)
+        self.year = kwargs.pop('year', None)
+        self.month = kwargs.pop('month', None)
+        self.day = kwargs.pop('day', None)
 
         super().__init__(*args, **kwargs)
 
         self.fields.pop('user')
         self.fields.pop('log')
         self.fields.pop('group')
+        self.fields.pop('for_date')
 
         # Get field codes that are applied to Acknowledgement
         log_qs = models.Log.objects.filter(pk=self.log_pk)
@@ -72,7 +77,7 @@ class CreateAcknowledgementForm(forms.ModelForm):
             acknowledgement_fields_qs = log.engineering_acknowledgement_fields.all()
         elif self.user.groups.all()[0].name == 'Operator':
             acknowledgement_fields_qs = log.new_shift_acknowledgement_fields.all()
-            
+
         acknowledgement_field_codes = [acknowledgement_field.type for acknowledgement_field in acknowledgement_fields_qs]
 
         # Get all field codes
@@ -93,5 +98,7 @@ class CreateAcknowledgementForm(forms.ModelForm):
         entry.user = self.user
         entry.log = models.Log.objects.filter(pk=self.log_pk)[0]
         entry.group = self.user.groups.all()[0]
+        entry.for_date = datetime.date(int(self.year), int(self.month), int(self.day))
+
         entry.save()
         return entry

@@ -90,7 +90,7 @@ class Log(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsMixin, Cr
             context['date_add'] = date_add
 
             entries = entries.filter(created_at__date=timezone.localtime(date))
-            acknowledgements = acknowledgements.filter(created_at__date=timezone.localtime(date))
+            acknowledgements = acknowledgements.filter(for_date=timezone.localtime(date))
 
         if url_name == "log_date_range":
             year_start = self.kwargs['year_start']
@@ -277,6 +277,9 @@ class Acknowledge(LoginRequiredMixin, PermissionRequiredMixin, AreasMixin, LogsM
             'user': self.request.user,
             'log_pk': self.kwargs['log_pk'],
             'group': self.request.user.groups.all(),
+            'year': self.kwargs['year'],
+            'month': self.kwargs['month'],
+            'day': self.kwargs['day'],
         })
         return kwargs
 

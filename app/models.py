@@ -150,6 +150,7 @@ class Acknowledgement(models.Model):
     log = models.ForeignKey(Log, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    for_date = models.DateField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     CF1 = models.CharField(max_length=50, blank=True, null=True)
