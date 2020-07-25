@@ -26,6 +26,11 @@ class Field(models.Model):
         ('TF3', 'Long text field 3'),
         ('TF4', 'Long text field 4'),
         ('TF5', 'Long text field 5'),
+        ('TF6', 'Long text field 5'),
+        ('TF7', 'Long text field 5'),
+        ('TF8', 'Long text field 5'),
+        ('TF9', 'Long text field 5'),
+        ('TF10', 'Long text field 5'),
         ('IF1', 'Integer field 1'),
         ('IF2', 'Integer field 2'),
         ('IF3', 'Integer field 3'),
@@ -61,6 +66,11 @@ class AcknowledgementField(models.Model):
         ('TF3', 'Long text field 3'),
         ('TF4', 'Long text field 4'),
         ('TF5', 'Long text field 5'),
+        ('TF6', 'Long text field 6'),
+        ('TF7', 'Long text field 7'),
+        ('TF8', 'Long text field 8'),
+        ('TF9', 'Long text field 9'),
+        ('TF10', 'Long text field 10'),
         ('IF1', 'Integer field 1'),
         ('IF2', 'Integer field 2'),
         ('IF3', 'Integer field 3'),
@@ -127,6 +137,11 @@ class Entry(models.Model):
     TF3 = models.TextField(blank=True, null=True)
     TF4 = models.TextField(blank=True, null=True)
     TF5 = models.TextField(blank=True, null=True)
+    TF6 = models.TextField(blank=True, null=True)
+    TF7 = models.TextField(blank=True, null=True)
+    TF8 = models.TextField(blank=True, null=True)
+    TF9 = models.TextField(blank=True, null=True)
+    TF10 = models.TextField(blank=True, null=True)
 
     IF1 = models.IntegerField(blank=True, null=True)
     IF2 = models.IntegerField(blank=True, null=True)
@@ -169,6 +184,11 @@ class Acknowledgement(models.Model):
     TF3 = models.TextField(blank=True, null=True)
     TF4 = models.TextField(blank=True, null=True)
     TF5 = models.TextField(blank=True, null=True)
+    TF6 = models.TextField(blank=True, null=True)
+    TF7 = models.TextField(blank=True, null=True)
+    TF8 = models.TextField(blank=True, null=True)
+    TF9 = models.TextField(blank=True, null=True)
+    TF10 = models.TextField(blank=True, null=True)
 
     IF1 = models.IntegerField(blank=True, null=True)
     IF2 = models.IntegerField(blank=True, null=True)

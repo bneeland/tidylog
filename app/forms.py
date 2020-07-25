@@ -35,7 +35,7 @@ class CreateEntryForm(forms.ModelForm):
 
         # Set field labels
         for code in log_field_codes:
-            self.fields[code].label = models.Field.objects.filter(type=code)[0].name
+            self.fields[code].label = models.Field.objects.filter(log=self.log_pk, type=code)[0].name
 
     def save(self):
         entry = super(CreateEntryForm, self).save(commit=False)
