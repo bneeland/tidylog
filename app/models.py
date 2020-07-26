@@ -114,6 +114,8 @@ class Entry(models.Model):
         ('UR', 'Unresolved'),
         ('IP', 'In progress'),
         ('RE', 'Resolved'),
+        ('AP', 'Approved'),
+        ('CA', 'Cancelled'),
     )
     log = models.ForeignKey(Log, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

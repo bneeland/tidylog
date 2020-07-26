@@ -115,7 +115,7 @@
                   <td class="align-text-bottom"><b>Status</b></td>
                   <td class="align-text-bottom">
                     {% if entry.category.is_tracked %}
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }} <i class="far fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_status">{{ entry.get_status_display }}</button>
                     {% else %}
                       &mdash;
                     {% endif %}
