@@ -3,6 +3,7 @@
 :root {
   --tidy-blue-dark: #5084F8;
   --tidy-blue-light: #6693f8;
+  --tidy-blue-deep: #240088;
   --tidy-green: #43B581;
   --tidy-black: #33363A;
   --tidy-darkest: #4F5660;
@@ -17,9 +18,12 @@ body {
   color: var(--tidy-black);
 }
 
+.jumbotron-nav {
+  background: var(--tidy-lightest);
+}
+
 .jumbotron-splash {
-  color: white;
-  background: var(--tidy-black);
+  background: white;
 }
 
 a, .btn-link {
@@ -32,13 +36,22 @@ a:hover, .btn-link:hover {
 }
 
 a.navbar-brand, a.navbar-brand:hover {
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1.5em;
-  color: white;
+  color: var(--tidy-black);
+}
+
+.brand {
+  font-weight: 300;
+  font-size: 1.3em;
 }
 
 nav a {
-  color: white;
+  color: var(--tidy-dark);
+}
+
+nav a:hover {
+  color: var(--tidy-darkest);
 }
 
 button.navbar-toggler {
@@ -67,15 +80,28 @@ button.navbar-toggler {
 
 .btn-secondary {
   background: var(--tidy-light);
-  color: var(--tidy-dark);
+  color: var(--tidy-darkest);
 }
 
 .btn-secondary:hover {
-  background: var(--tidy-medium);
+  background: var(--tidy-lightest);
   color: var(--tidy-darkest);
 }
 
 .btn:not(:disabled):not(.disabled).btn-text {
   cursor: default;
   color: var(--tidy-black);
+}
+
+footer {
+  background: var(--tidy-black);
+  color: white;
+}
+
+footer a {
+  color: white;
+}
+
+footer a:hover {
+  color: var(--tidy-medium);
 }
