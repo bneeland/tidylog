@@ -5,14 +5,31 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  {% if user.is_authenticated %}
-    <p>[Logged in as {{ user.email }}.]</p>
-    <p><a href="{% url 'app:home' %}">Enter app</a></p>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-    <p><a href="{% url 'password_change' %}">Change password</a></p>
-  {% else %}
-    <p>[Not logged in.]</p>
-    <p><a href="{% url 'login' %}">Log in</a> | <a href="{% url 'signup' %}">Sign up</a></p>
-    <p>Forgot password? <a href="{% url 'password_reset' %}">Reset it</a></p>
-  {% endif %}
+
+  <div class="jumbotron jumbotron-fluid jumbotron-splash py-3">
+
+    <div class="container">
+
+      <div class="row text-center">
+
+          <div class="col-lg-10 offset-lg-1 mt-5 pt-5">
+            <h1 class="title">The #1 electronic log book</h1>
+          </div>
+
+          <div class="col-lg-8 offset-lg-2 my-5">
+
+            <h4 class="subtitle mb-5">TidyLog is a simple, functional electronic log book that takes care of regulation compliance <i>and</i> improves operations.</h4>
+
+            <p><a class="btn btn-primary" href="{% url 'signup' %}" role="button">Get started</a></p>
+
+            <p><a class="btn btn-secondary" href="{% url 'signup' %}" role="button">Learn more</a></p>
+
+          </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 {% endblock %}
