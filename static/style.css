@@ -18,6 +18,14 @@ body {
   color: var(--tidy-black);
 }
 
+p {
+  color: var(--tidy-darkest);
+}
+
+.color-blue {
+  color: var(--tidy-blue-dark);
+}
+
 .jumbotron-nav {
   background: var(--tidy-lightest);
 }

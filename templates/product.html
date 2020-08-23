@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  <div class="jumbotron jumbotron-fluid bg-white m-0">
+
+    <div class="container">
+
+      <h1 class="color-blue font-weight-light text-center mb-5">Product</h1>
+
+      <h3 class="mb-5">Comply with regulations</h3>
+
+      <p>In Alberta, the Power Engineers Regulation requires that certain power plants, thermal liquid heating systems, and heating plants update and maintain a log book. This log book can be electronic, if it has certain features.</p>
+      <p>TidyLog is an electronic log book that meets all regulatory requirements:</p>
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Permanent record</h5>
+            <p class="card-text">Prevents revisions, additions, or deletions to data which has been previously recorded.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Review and acknowledge</h5>
+            <p class="card-text">Allows operators and engineers to review the log entries and acknowledge entries by shift. Tracks reviews and acknowledgements.</p>
+            <p class="card-text">Allows a safety codes officer to review the log.</p>
+            <p class="card-text">Allows an engineer to comment on the log without modifying the original data.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Secure</h5>
+            <p class="card-text">Unique and secure accounts identifies the employee entering, reviewing, and acknowledging logs.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tracked</h5>
+            <p class="card-text">Each entry, review, and acknowledgement in the log is time-stamped with the date and time of the event.</p>
+            <p class="card-text">Each entry, review, and acknowledgment tracks the employee who performed the activity in the log.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mb-5 mt-5">Use your log book data to improve your operations</h3>
+
+      <p>TidyLog has been developed from the ground up to be extremely user-friendly, to empower users to log accurate, detailed, and useful log book entries, and to be customizable so that organizations can easily craft the electronic log books they need.
+      <p>TidyLog has features that turn your log books into effective tracking, communication, and accountability tools:
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Shift change</h5>
+            <p class="card-text">Make sure the next shift reviews the previous shift’s log.</p>
+            <p class="card-text">The previous shift can communicate issues and developments to the next shift through the log book.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Event tracking</h5>
+            <p class="card-text">Events like maintenance requests and bypasses are tracked within the log. This makes it easy to see what events are still ongoing and need to be resolved.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Granular log fields</h5>
+            <p class="card-text">Log fields can be as fine-grained and as detailed as you want. This makes it easier for employees to enter detailed, precise data into the log book.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Automatic updates</h5>
+            <p class="card-text">Updates to TidyLog are automatic. As you provide feedback to TidyLog, we update your electronic log book and you get those updates automatically, without needing to make any changes on your end.</p>
+            <p class="card-text">As a TidyLog user, we encourage you to propose changes to us, and we are eager to improve the application continuously.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}
