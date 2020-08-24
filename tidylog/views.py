@@ -9,5 +9,5 @@ class Product(TemplateView):
 class Pricing(TemplateView):
     template_name = "pricing.html"
 
-# class Contact(TemplateView):
-#     template_name = "contact.html"
+class Contact(TemplateView):
+    template_name = "contact.html"
