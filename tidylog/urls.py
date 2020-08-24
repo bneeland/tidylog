@@ -24,7 +24,7 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')), # All django user registration default views
     path('', views.Home.as_view(), name='home'), # The home page
     path('product', views.Product.as_view(), name='product'), # The home page
-    # path('pricing', views.Pricing.as_view(), name='pricing'), # The home page
+    path('pricing', views.Pricing.as_view(), name='pricing'), # The home page
     # path('contact', views.Contact.as_view(), name='contact'), # The home page
     path('app/', include('app.urls', namespace='app')),
 ]

@@ -5,9 +5,9 @@ class Home(TemplateView):
 
 class Product(TemplateView):
     template_name = "product.html"
-# 
-# class Pricing(TemplateView):
-#     template_name = "pricing.html"
-#
+
+class Pricing(TemplateView):
+    template_name = "pricing.html"
+
 # class Contact(TemplateView):
 #     template_name = "contact.html"
