@@ -31,6 +31,15 @@ class LogsMixin(ContextMixin):
 
 # Views
 
+class NewUser(CreateView):
+    model = models.NewUser
+    fields = ['email', 'name', 'company', ]
+    template_name = "app/new_user.html"
+    success_url = reverse_lazy('app:new_user_success')
+
+class NewUserSuccess(TemplateView):
+    template_name = "app/new_user_success.html"
+
 class Home(LoginRequiredMixin, AreasMixin, TemplateView):
     login_url = "login"
     template_name = "app/home.html"

@@ -21,8 +21,8 @@
             <h4 class="subtitle mb-5">TidyLog is a simple, functional electronic log book that takes care of regulation compliance <i>and</i> improves operations.</h4>
 
             <p>
-              <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Get started</a>
-              <span class="ml-2"><a class="btn btn-secondary" href="#" role="button">Learn more</a></span>
+              <a class="btn btn-primary" href="{% url 'app:new_user' %}" role="button">Get started</a>
+              <span class="ml-2"><a class="btn btn-secondary" href="{% url 'product' %}" role="button">Learn more</a></span>
             </p>
 
           </div>
@@ -45,7 +45,7 @@
             <p class="card-text">We update TidyLog to maintain compliance over time&mdash;seamlessly updating your application&mdash;so you don't have to.</p>
           </div>
           <div class="card-footer bg-white border-0">
-            <a href="#" class="btn btn-secondary">Learn more</a>
+            <a href="{% url 'product' %}" class="btn btn-secondary">Learn more</a>
           </div>
         </div>
         <div class="card border-0">
@@ -56,13 +56,13 @@
           </div>
 
           <div class="card-footer bg-white border-0">
-            <a href="#" class="btn btn-secondary">Learn more</a>
+            <a href="{% url 'product' %}" class="btn btn-secondary">Learn more</a>
           </div>
         </div>
       </div>
 
       <div class="mt-5 text-center">
-        <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Get started</a>
+        <a class="btn btn-primary" href="{% url 'app:new_user' %}" role="button">Get started</a>
       </div>
 
     </div>

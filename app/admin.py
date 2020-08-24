@@ -19,6 +19,7 @@ class AcknowledgementFieldAdmin(admin.ModelAdmin):
     model = models.AcknowledgementField
     list_display = ['name', 'type',]
 
+admin.site.register(models.NewUser)
 admin.site.register(models.Area)
 admin.site.register(models.Log)
 admin.site.register(models.Field, FieldAdmin)

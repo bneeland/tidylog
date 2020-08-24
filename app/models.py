@@ -2,6 +2,14 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import Group
 
+class NewUser(models.Model):
+    email = models.EmailField(max_length=254)
+    name = models.CharField(max_length=254, blank=True, null=True)
+    company = models.CharField(max_length=254, blank=True, null=True)
+
+    def __str__(self):
+        return self.email
+
 class Area(models.Model):
     name = models.CharField(max_length=50)
 

@@ -6,6 +6,8 @@ app_name = 'app'
 
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
+    path('get-started', views.NewUser.as_view(), name='new_user'),
+    path('get-started/done', views.NewUserSuccess.as_view(), name='new_user_success'),
     path('area-<int:area_pk>', views.Area.as_view(), name='area'),
     path('area-<int:area_pk>/log-<int:log_pk>/acknowledgements', views.Log.as_view(), name='log', kwargs={'acknowledgements': True}),
     path('area-<int:area_pk>/log-<int:log_pk>', views.Log.as_view(), name='log', kwargs={'acknowledgements': False}),

@@ -22,9 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls), # The admin site
     path('users/', include('users.urls')), # The custom user app called 'users'
     path('users/', include('django.contrib.auth.urls')), # All django user registration default views
-    path('', views.Home.as_view(), name='home'), # The home page
-    path('product', views.Product.as_view(), name='product'), # The home page
-    path('pricing', views.Pricing.as_view(), name='pricing'), # The home page
-    path('contact', views.Contact.as_view(), name='contact'), # The home page
+    path('', views.Home.as_view(), name='home'),
+    path('product', views.Product.as_view(), name='product'),
+    path('pricing', views.Pricing.as_view(), name='pricing'),
+    path('contact', views.Contact.as_view(), name='contact'),
     path('app/', include('app.urls', namespace='app')),
 ]
